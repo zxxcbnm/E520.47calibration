@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="E520._47标定.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Openpath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\\</Value>
+    </Setting>
+    <Setting Name="p1p2_xuanze" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="T1_xuanze" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="T2_xuanze" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="Savepath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\\</Value>
+    </Setting>
+    <Setting Name="Cdatpath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
