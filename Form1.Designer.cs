@@ -29,87 +29,87 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem69 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem70 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem71 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem72 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem73 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem74 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem75 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem76 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem77 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem78 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem79 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem80 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem81 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem82 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem83 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem84 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "",
             "",
             ""}, -1, System.Drawing.Color.Empty, System.Drawing.SystemColors.Window, null);
-            System.Windows.Forms.ListViewItem listViewItem85 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -129,7 +129,7 @@
             "48444",
             "2023-10-30",
             "18:33:49"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem86 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -149,7 +149,7 @@
             "48400",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem87 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -169,7 +169,7 @@
             "48330",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem88 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -189,7 +189,7 @@
             "48500",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem89 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -209,7 +209,7 @@
             "48600",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem90 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -229,7 +229,7 @@
             "48500",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem91 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -249,7 +249,7 @@
             "48444",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem92 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -269,7 +269,7 @@
             "48555",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem93 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem25 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "10",
             "0000B5C8",
@@ -289,7 +289,7 @@
             "48333",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem94 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -309,7 +309,7 @@
             "48566",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem95 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -329,7 +329,7 @@
             "48222",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem96 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem28 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -349,7 +349,7 @@
             "48542",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem97 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem29 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -369,7 +369,7 @@
             "48523",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem98 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem30 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -389,7 +389,7 @@
             "48525",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem99 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem31 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -409,7 +409,7 @@
             "48755",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem100 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem32 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -429,7 +429,7 @@
             "48755",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem101 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem33 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -449,7 +449,7 @@
             "48675",
             "",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem102 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem34 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "1",
             "0000A5B8",
@@ -611,14 +611,22 @@
             this.btn_cdat_save = new System.Windows.Forms.Button();
             this.saveCdat = new System.Windows.Forms.SaveFileDialog();
             this.openCdat = new System.Windows.Forms.OpenFileDialog();
+            this.Timer_user = new System.Windows.Forms.Timer(this.components);
+            this.group2 = new System.Windows.Forms.GroupBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.COM_Port = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.group1.SuspendLayout();
+            this.group2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCalibration
             // 
+            this.btnCalibration.Enabled = false;
             this.btnCalibration.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalibration.Location = new System.Drawing.Point(1170, 675);
+            this.btnCalibration.Location = new System.Drawing.Point(1171, 654);
             this.btnCalibration.Name = "btnCalibration";
             this.btnCalibration.Size = new System.Drawing.Size(106, 74);
             this.btnCalibration.TabIndex = 1;
@@ -628,6 +636,7 @@
             // 
             // btn_Sentslow
             // 
+            this.btn_Sentslow.Enabled = false;
             this.btn_Sentslow.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Sentslow.Location = new System.Drawing.Point(1170, 85);
             this.btn_Sentslow.Name = "btn_Sentslow";
@@ -639,6 +648,7 @@
             // 
             // btn_SentConf
             // 
+            this.btn_SentConf.Enabled = false;
             this.btn_SentConf.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_SentConf.Location = new System.Drawing.Point(1303, 85);
             this.btn_SentConf.Name = "btn_SentConf";
@@ -650,6 +660,7 @@
             // 
             // btn_DIAG
             // 
+            this.btn_DIAG.Enabled = false;
             this.btn_DIAG.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_DIAG.Location = new System.Drawing.Point(1170, 190);
             this.btn_DIAG.Name = "btn_DIAG";
@@ -661,6 +672,7 @@
             // 
             // btn_T
             // 
+            this.btn_T.Enabled = false;
             this.btn_T.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_T.Location = new System.Drawing.Point(1170, 295);
             this.btn_T.Name = "btn_T";
@@ -672,6 +684,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(1303, 295);
             this.button1.Name = "button1";
@@ -683,6 +696,7 @@
             // 
             // btn_load_sfr
             // 
+            this.btn_load_sfr.Enabled = false;
             this.btn_load_sfr.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_load_sfr.Location = new System.Drawing.Point(1170, 400);
             this.btn_load_sfr.Name = "btn_load_sfr";
@@ -699,6 +713,7 @@
             // 
             // btn_save_sfr
             // 
+            this.btn_save_sfr.Enabled = false;
             this.btn_save_sfr.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_save_sfr.Location = new System.Drawing.Point(1303, 400);
             this.btn_save_sfr.Name = "btn_save_sfr";
@@ -716,7 +731,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(12, 774);
+            this.button2.Location = new System.Drawing.Point(9, 654);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 30);
             this.button2.TabIndex = 12;
@@ -728,7 +743,7 @@
             // btn_Close
             // 
             this.btn_Close.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Close.Location = new System.Drawing.Point(1309, 807);
+            this.btn_Close.Location = new System.Drawing.Point(1310, 786);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(100, 33);
             this.btn_Close.TabIndex = 13;
@@ -752,7 +767,7 @@
             this.PortName.Enabled = false;
             this.PortName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PortName.FormattingEnabled = true;
-            this.PortName.Location = new System.Drawing.Point(69, 810);
+            this.PortName.Location = new System.Drawing.Point(69, 778);
             this.PortName.Name = "PortName";
             this.PortName.Size = new System.Drawing.Size(86, 25);
             this.PortName.TabIndex = 27;
@@ -761,7 +776,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 815);
+            this.label1.Location = new System.Drawing.Point(9, 783);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 28;
@@ -774,6 +789,7 @@
             // 
             // btn_Write_NVM
             // 
+            this.btn_Write_NVM.Enabled = false;
             this.btn_Write_NVM.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Write_NVM.Location = new System.Drawing.Point(1170, 505);
             this.btn_Write_NVM.Name = "btn_Write_NVM";
@@ -785,6 +801,7 @@
             // 
             // btn_READ_NVM
             // 
+            this.btn_READ_NVM.Enabled = false;
             this.btn_READ_NVM.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_READ_NVM.Location = new System.Drawing.Point(1303, 505);
             this.btn_READ_NVM.Name = "btn_READ_NVM";
@@ -1015,22 +1032,22 @@
             this.listview_status.GridLines = true;
             this.listview_status.HideSelection = false;
             this.listview_status.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem69,
-            listViewItem70,
-            listViewItem71,
-            listViewItem72,
-            listViewItem73,
-            listViewItem74,
-            listViewItem75,
-            listViewItem76,
-            listViewItem77,
-            listViewItem78,
-            listViewItem79,
-            listViewItem80,
-            listViewItem81,
-            listViewItem82,
-            listViewItem83,
-            listViewItem84});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12,
+            listViewItem13,
+            listViewItem14,
+            listViewItem15,
+            listViewItem16});
             this.listview_status.Location = new System.Drawing.Point(69, 37);
             this.listview_status.Name = "listview_status";
             this.listview_status.Size = new System.Drawing.Size(186, 443);
@@ -1058,7 +1075,7 @@
             // btn_sample1
             // 
             this.btn_sample1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_sample1.Location = new System.Drawing.Point(898, 556);
+            this.btn_sample1.Location = new System.Drawing.Point(624, 65);
             this.btn_sample1.Name = "btn_sample1";
             this.btn_sample1.Size = new System.Drawing.Size(93, 40);
             this.btn_sample1.TabIndex = 37;
@@ -1069,7 +1086,7 @@
             // tbx_diwen
             // 
             this.tbx_diwen.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_diwen.Location = new System.Drawing.Point(381, 562);
+            this.tbx_diwen.Location = new System.Drawing.Point(107, 71);
             this.tbx_diwen.Name = "tbx_diwen";
             this.tbx_diwen.Size = new System.Drawing.Size(60, 25);
             this.tbx_diwen.TabIndex = 38;
@@ -1081,7 +1098,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(319, 566);
+            this.label2.Location = new System.Drawing.Point(45, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 39;
@@ -1090,7 +1107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(446, 566);
+            this.label3.Location = new System.Drawing.Point(172, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(22, 15);
             this.label3.TabIndex = 40;
@@ -1099,7 +1116,7 @@
             // tbx_changwen
             // 
             this.tbx_changwen.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_changwen.Location = new System.Drawing.Point(567, 562);
+            this.tbx_changwen.Location = new System.Drawing.Point(293, 71);
             this.tbx_changwen.Name = "tbx_changwen";
             this.tbx_changwen.Size = new System.Drawing.Size(60, 25);
             this.tbx_changwen.TabIndex = 38;
@@ -1111,7 +1128,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(506, 566);
+            this.label4.Location = new System.Drawing.Point(232, 75);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
             this.label4.TabIndex = 39;
@@ -1120,7 +1137,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(633, 566);
+            this.label5.Location = new System.Drawing.Point(359, 75);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(22, 15);
             this.label5.TabIndex = 40;
@@ -1129,7 +1146,7 @@
             // tbx_cishu
             // 
             this.tbx_cishu.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_cishu.Location = new System.Drawing.Point(941, 512);
+            this.tbx_cishu.Location = new System.Drawing.Point(667, 21);
             this.tbx_cishu.Name = "tbx_cishu";
             this.tbx_cishu.Size = new System.Drawing.Size(40, 25);
             this.tbx_cishu.TabIndex = 38;
@@ -1140,7 +1157,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(853, 516);
+            this.label6.Location = new System.Drawing.Point(579, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 15);
             this.label6.TabIndex = 39;
@@ -1149,7 +1166,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(983, 516);
+            this.label7.Location = new System.Drawing.Point(709, 25);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(22, 15);
             this.label7.TabIndex = 40;
@@ -1181,24 +1198,24 @@
             this.listView_sample.GridLines = true;
             this.listView_sample.HideSelection = false;
             this.listView_sample.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem85,
-            listViewItem86,
-            listViewItem87,
-            listViewItem88,
-            listViewItem89,
-            listViewItem90,
-            listViewItem91,
-            listViewItem92,
-            listViewItem93,
-            listViewItem94,
-            listViewItem95,
-            listViewItem96,
-            listViewItem97,
-            listViewItem98,
-            listViewItem99,
-            listViewItem100,
-            listViewItem101,
-            listViewItem102});
+            listViewItem17,
+            listViewItem18,
+            listViewItem19,
+            listViewItem20,
+            listViewItem21,
+            listViewItem22,
+            listViewItem23,
+            listViewItem24,
+            listViewItem25,
+            listViewItem26,
+            listViewItem27,
+            listViewItem28,
+            listViewItem29,
+            listViewItem30,
+            listViewItem31,
+            listViewItem32,
+            listViewItem33,
+            listViewItem34});
             this.listView_sample.Location = new System.Drawing.Point(261, 37);
             this.listView_sample.Name = "listView_sample";
             this.listView_sample.Size = new System.Drawing.Size(791, 443);
@@ -1303,7 +1320,7 @@
             // tbx_qiya1
             // 
             this.tbx_qiya1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_qiya1.Location = new System.Drawing.Point(381, 510);
+            this.tbx_qiya1.Location = new System.Drawing.Point(107, 19);
             this.tbx_qiya1.Name = "tbx_qiya1";
             this.tbx_qiya1.Size = new System.Drawing.Size(60, 25);
             this.tbx_qiya1.TabIndex = 38;
@@ -1315,7 +1332,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(319, 513);
+            this.label8.Location = new System.Drawing.Point(45, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(56, 17);
             this.label8.TabIndex = 39;
@@ -1324,7 +1341,7 @@
             // tbx_qiya2
             // 
             this.tbx_qiya2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_qiya2.Location = new System.Drawing.Point(567, 510);
+            this.tbx_qiya2.Location = new System.Drawing.Point(293, 19);
             this.tbx_qiya2.Name = "tbx_qiya2";
             this.tbx_qiya2.Size = new System.Drawing.Size(60, 25);
             this.tbx_qiya2.TabIndex = 38;
@@ -1335,7 +1352,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(506, 513);
+            this.label9.Location = new System.Drawing.Point(232, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 15);
             this.label9.TabIndex = 39;
@@ -1344,7 +1361,7 @@
             // tbx_qiya3
             // 
             this.tbx_qiya3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_qiya3.Location = new System.Drawing.Point(750, 510);
+            this.tbx_qiya3.Location = new System.Drawing.Point(476, 19);
             this.tbx_qiya3.Name = "tbx_qiya3";
             this.tbx_qiya3.Size = new System.Drawing.Size(60, 25);
             this.tbx_qiya3.TabIndex = 38;
@@ -1355,7 +1372,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(689, 513);
+            this.label10.Location = new System.Drawing.Point(415, 22);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(52, 15);
             this.label10.TabIndex = 39;
@@ -1364,7 +1381,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(446, 513);
+            this.label11.Location = new System.Drawing.Point(172, 22);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(31, 15);
             this.label11.TabIndex = 40;
@@ -1373,7 +1390,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(633, 513);
+            this.label12.Location = new System.Drawing.Point(359, 22);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 15);
             this.label12.TabIndex = 40;
@@ -1382,7 +1399,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(816, 513);
+            this.label13.Location = new System.Drawing.Point(542, 22);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(31, 15);
             this.label13.TabIndex = 40;
@@ -1391,7 +1408,7 @@
             // tbx_gaowen
             // 
             this.tbx_gaowen.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_gaowen.Location = new System.Drawing.Point(750, 565);
+            this.tbx_gaowen.Location = new System.Drawing.Point(476, 74);
             this.tbx_gaowen.Name = "tbx_gaowen";
             this.tbx_gaowen.Size = new System.Drawing.Size(60, 25);
             this.tbx_gaowen.TabIndex = 38;
@@ -1403,7 +1420,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(689, 566);
+            this.label14.Location = new System.Drawing.Point(415, 75);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(52, 15);
             this.label14.TabIndex = 39;
@@ -1412,7 +1429,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(816, 566);
+            this.label15.Location = new System.Drawing.Point(542, 75);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(22, 15);
             this.label15.TabIndex = 40;
@@ -1456,8 +1473,9 @@
             this.group1.Controls.Add(this.tbx_P2_X1);
             this.group1.Controls.Add(this.tbx_P1_X2);
             this.group1.Controls.Add(this.tbx_P1_X1);
+            this.group1.Enabled = false;
             this.group1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.group1.Location = new System.Drawing.Point(236, 648);
+            this.group1.Location = new System.Drawing.Point(237, 627);
             this.group1.Name = "group1";
             this.group1.Size = new System.Drawing.Size(755, 185);
             this.group1.TabIndex = 41;
@@ -1851,6 +1869,7 @@
             // polynominal_p1p2
             // 
             this.polynominal_p1p2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.polynominal_p1p2.Enabled = false;
             this.polynominal_p1p2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.polynominal_p1p2.FormattingEnabled = true;
             this.polynominal_p1p2.Items.AddRange(new object[] {
@@ -1860,7 +1879,7 @@
             "二阶 p，T = 常量",
             "二阶 p，二阶 T",
             "二阶 p，三阶 T"});
-            this.polynominal_p1p2.Location = new System.Drawing.Point(1008, 757);
+            this.polynominal_p1p2.Location = new System.Drawing.Point(1009, 736);
             this.polynominal_p1p2.Name = "polynominal_p1p2";
             this.polynominal_p1p2.Size = new System.Drawing.Size(156, 25);
             this.polynominal_p1p2.TabIndex = 42;
@@ -1870,7 +1889,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(1019, 737);
+            this.label32.Location = new System.Drawing.Point(1020, 716);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(116, 17);
             this.label32.TabIndex = 39;
@@ -1880,7 +1899,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(1019, 787);
+            this.label33.Location = new System.Drawing.Point(1020, 766);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(93, 17);
             this.label33.TabIndex = 39;
@@ -1889,6 +1908,7 @@
             // polynominal_T1
             // 
             this.polynominal_T1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.polynominal_T1.Enabled = false;
             this.polynominal_T1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.polynominal_T1.FormattingEnabled = true;
             this.polynominal_T1.Items.AddRange(new object[] {
@@ -1897,7 +1917,7 @@
             "一阶多项式",
             "二阶多项式",
             "三阶多项式"});
-            this.polynominal_T1.Location = new System.Drawing.Point(1008, 807);
+            this.polynominal_T1.Location = new System.Drawing.Point(1009, 786);
             this.polynominal_T1.Name = "polynominal_T1";
             this.polynominal_T1.Size = new System.Drawing.Size(127, 25);
             this.polynominal_T1.TabIndex = 42;
@@ -1907,7 +1927,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(1149, 787);
+            this.label34.Location = new System.Drawing.Point(1150, 766);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(93, 17);
             this.label34.TabIndex = 39;
@@ -1925,7 +1945,7 @@
             "一阶多项式",
             "二阶多项式",
             "三阶多项式"});
-            this.polynominal_T2.Location = new System.Drawing.Point(1141, 807);
+            this.polynominal_T2.Location = new System.Drawing.Point(1142, 786);
             this.polynominal_T2.Name = "polynominal_T2";
             this.polynominal_T2.Size = new System.Drawing.Size(127, 25);
             this.polynominal_T2.TabIndex = 42;
@@ -1933,8 +1953,9 @@
             // 
             // tbx_PSPx_limit
             // 
+            this.tbx_PSPx_limit.Enabled = false;
             this.tbx_PSPx_limit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_PSPx_limit.Location = new System.Drawing.Point(1070, 689);
+            this.tbx_PSPx_limit.Location = new System.Drawing.Point(1071, 668);
             this.tbx_PSPx_limit.Name = "tbx_PSPx_limit";
             this.tbx_PSPx_limit.Size = new System.Drawing.Size(48, 25);
             this.tbx_PSPx_limit.TabIndex = 38;
@@ -1946,7 +1967,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(1018, 669);
+            this.label35.Location = new System.Drawing.Point(1019, 648);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(127, 17);
             this.label35.TabIndex = 39;
@@ -1960,12 +1981,13 @@
             this.listView1.ItemHeight = 17;
             this.listView1.Location = new System.Drawing.Point(12, 573);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(97, 208);
+            this.listView1.Size = new System.Drawing.Size(97, 72);
             this.listView1.TabIndex = 43;
             this.listView1.Visible = false;
             // 
             // btn_del_rdata
             // 
+            this.btn_del_rdata.Enabled = false;
             this.btn_del_rdata.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_del_rdata.Location = new System.Drawing.Point(1058, 189);
             this.btn_del_rdata.Name = "btn_del_rdata";
@@ -1977,6 +1999,7 @@
             // 
             // btn_save_rdata
             // 
+            this.btn_save_rdata.Enabled = false;
             this.btn_save_rdata.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_save_rdata.Location = new System.Drawing.Point(1058, 85);
             this.btn_save_rdata.Name = "btn_save_rdata";
@@ -1988,6 +2011,7 @@
             // 
             // btn_load_rdata
             // 
+            this.btn_load_rdata.Enabled = false;
             this.btn_load_rdata.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_load_rdata.Location = new System.Drawing.Point(1058, 137);
             this.btn_load_rdata.Name = "btn_load_rdata";
@@ -1999,8 +2023,9 @@
             // 
             // btn_verify
             // 
+            this.btn_verify.Enabled = false;
             this.btn_verify.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_verify.Location = new System.Drawing.Point(1303, 675);
+            this.btn_verify.Location = new System.Drawing.Point(1304, 654);
             this.btn_verify.Name = "btn_verify";
             this.btn_verify.Size = new System.Drawing.Size(106, 74);
             this.btn_verify.TabIndex = 1;
@@ -2049,7 +2074,8 @@
             // 
             // btn_cdat_open
             // 
-            this.btn_cdat_open.Location = new System.Drawing.Point(134, 715);
+            this.btn_cdat_open.Enabled = false;
+            this.btn_cdat_open.Location = new System.Drawing.Point(134, 689);
             this.btn_cdat_open.Name = "btn_cdat_open";
             this.btn_cdat_open.Size = new System.Drawing.Size(80, 30);
             this.btn_cdat_open.TabIndex = 47;
@@ -2059,7 +2085,8 @@
             // 
             // btn_cdat_save
             // 
-            this.btn_cdat_save.Location = new System.Drawing.Point(134, 751);
+            this.btn_cdat_save.Enabled = false;
+            this.btn_cdat_save.Location = new System.Drawing.Point(134, 725);
             this.btn_cdat_save.Name = "btn_cdat_save";
             this.btn_cdat_save.Size = new System.Drawing.Size(80, 30);
             this.btn_cdat_save.TabIndex = 47;
@@ -2076,6 +2103,67 @@
             // 
             this.openCdat.Filter = "Data Files (*.cdat)|*.cdat";
             // 
+            // Timer_user
+            // 
+            this.Timer_user.Enabled = true;
+            this.Timer_user.Interval = 500;
+            this.Timer_user.Tick += new System.EventHandler(this.Timer_user_Tick);
+            // 
+            // group2
+            // 
+            this.group2.Controls.Add(this.tbx_gaowen);
+            this.group2.Controls.Add(this.btn_sample1);
+            this.group2.Controls.Add(this.tbx_diwen);
+            this.group2.Controls.Add(this.tbx_qiya1);
+            this.group2.Controls.Add(this.label2);
+            this.group2.Controls.Add(this.tbx_qiya2);
+            this.group2.Controls.Add(this.label8);
+            this.group2.Controls.Add(this.tbx_qiya3);
+            this.group2.Controls.Add(this.label9);
+            this.group2.Controls.Add(this.label10);
+            this.group2.Controls.Add(this.tbx_changwen);
+            this.group2.Controls.Add(this.label7);
+            this.group2.Controls.Add(this.label4);
+            this.group2.Controls.Add(this.label15);
+            this.group2.Controls.Add(this.label14);
+            this.group2.Controls.Add(this.label5);
+            this.group2.Controls.Add(this.tbx_cishu);
+            this.group2.Controls.Add(this.label13);
+            this.group2.Controls.Add(this.label6);
+            this.group2.Controls.Add(this.label12);
+            this.group2.Controls.Add(this.label3);
+            this.group2.Controls.Add(this.label11);
+            this.group2.Enabled = false;
+            this.group2.Location = new System.Drawing.Point(261, 486);
+            this.group2.Name = "group2";
+            this.group2.Size = new System.Drawing.Size(791, 119);
+            this.group2.TabIndex = 48;
+            this.group2.TabStop = false;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.COM_Port});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 833);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1432, 26);
+            this.statusStrip1.TabIndex = 49;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(69, 20);
+            this.toolStripStatusLabel1.Text = "串口号：";
+            // 
+            // COM_Port
+            // 
+            this.COM_Port.Name = "COM_Port";
+            this.COM_Port.Size = new System.Drawing.Size(167, 20);
+            this.COM_Port.Text = "toolStripStatusLabel2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -2084,6 +2172,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1432, 859);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.group2);
             this.Controls.Add(this.btn_cdat_save);
             this.Controls.Add(this.btn_cdat_open);
             this.Controls.Add(this.btn_jiancha);
@@ -2094,36 +2184,14 @@
             this.Controls.Add(this.polynominal_T1);
             this.Controls.Add(this.polynominal_p1p2);
             this.Controls.Add(this.group1);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.label34);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label33);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.label35);
             this.Controls.Add(this.tbx_PSPx_limit);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.tbx_cishu);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.tbx_gaowen);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.tbx_changwen);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.tbx_qiya3);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.tbx_qiya2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbx_qiya1);
-            this.Controls.Add(this.tbx_diwen);
             this.Controls.Add(this.btn_load_rdata);
             this.Controls.Add(this.btn_save_rdata);
             this.Controls.Add(this.btn_del_rdata);
-            this.Controls.Add(this.btn_sample1);
             this.Controls.Add(this.listView_sample);
             this.Controls.Add(this.listview_status);
             this.Controls.Add(this.enabled_channel);
@@ -2171,6 +2239,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
+            this.group2.ResumeLayout(false);
+            this.group2.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2318,6 +2390,11 @@
         private System.Windows.Forms.Button btn_cdat_save;
         private System.Windows.Forms.SaveFileDialog saveCdat;
         private System.Windows.Forms.OpenFileDialog openCdat;
+        private System.Windows.Forms.Timer Timer_user;
+        private System.Windows.Forms.GroupBox group2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel COM_Port;
     }
 }
 

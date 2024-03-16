@@ -78,6 +78,7 @@
       <HintPath>packages\NuGet.Frameworks.6.7.0\lib\net472\NuGet.Frameworks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
@@ -132,11 +133,18 @@
     <Compile Include="Temperature.Designer.cs">
       <DependentUpon>Temperature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\SqlHelper.cs" />
     <Compile Include="verify.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="verify.Designer.cs">
       <DependentUpon>verify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="注册窗口.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="注册窗口.Designer.cs">
+      <DependentUpon>注册窗口.cs</DependentUpon>
     </Compile>
     <Compile Include="登录窗口.cs">
       <SubType>Form</SubType>
@@ -181,13 +189,15 @@
     <EmbeddedResource Include="verify.resx">
       <DependentUpon>verify.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="注册窗口.resx">
+      <DependentUpon>注册窗口.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="登录窗口.resx">
       <DependentUpon>登录窗口.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="选择通道.resx">
       <DependentUpon>选择通道.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="E520.47标定_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -219,6 +229,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\logo.jpg" />
+    <None Include="Resources\logo.bmp" />
     <Resource Include="bin\Release\ssp_api.dll" />
     <Resource Include="bin\Release\ssp_cal_dpu10.dll" />
     <Resource Include="bin\Release\ssp_cfg_520.dll" />

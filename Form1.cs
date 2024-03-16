@@ -28,7 +28,6 @@ namespace E520._47标定
             PortName.Items.AddRange(portname);   //Add to interface
             try { PortName.SelectedIndex = 0; }        //Preselect Items
             catch { }
-
         }
         public static string[] NVM_code = new string[]
         {   "0000","0000","0000","0000","0000","0000","0000","0000",//OEM[0~8]
@@ -49,14 +48,8 @@ namespace E520._47标定
             "F8DA","0000","0000","3E5F","5A52","33DD","6719","0001",//T2_Q1/2/3/4,LOCK2,CRC2,ID1/0,ID3/2
             "3065","0000","54DB","0A88","57DC","0000","0000","B87F"// A/F_TRIM,V_TRIM,M_TADC,N_TADC,OT_LIM,free,LOCK3,CRC3
         };
-        //string[] strcom_rdata = new string[]
-        //    {
-        //        "CCP 3 93 00 94 4","CCP 3 93 01 95 4","CCP 3 93 02 96 4",
-        //        "CCP 3 93 03 97 4","CCP 3 93 04 98 4","CCP 3 93 05 99 4",
-        //        "CCP 3 93 06 9a 4","CCP 3 93 07 9b 4","CCP 3 93 34 c8 4",
-        //        "CCP 3 93 35 c9 4","CCP 3 93 36 ca 4"
-        //    };
-
+       
+        public static string character = "";
         public static string[] slow_ID_Value = new string[42];
         public static UInt16[] NVM_code1 = new UInt16[128];
         public static string[] enable_channel1 = new string[16];
@@ -68,8 +61,6 @@ namespace E520._47标定
         UInt16 Sample_selected;
         double[,] aAdcDiode1 = new double[16, 4];
         string[,] Calibration_code = new string[15, 44];
-        //string[,] rdata = new string[15, 11];
-        //UInt16[] read_Rdata = new UInt16[11];
         bool cabliration_falg = false;
 
         //set the delegate callback function
@@ -132,6 +123,7 @@ namespace E520._47标定
         UInt16 cishu;
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             listView_sample.Items.Clear();
             ThreadStart threadStart = new ThreadStart(() =>
             {
@@ -221,8 +213,85 @@ namespace E520._47标定
             CBX_MUX5.Checked = true;
             CBX_MUX6.Checked = true;
             CBX_MUX7.Checked = true;
+            Users_login users_Login = new Users_login();
+            users_Login.Show();
+            
         }
-
+        private void Administrator()
+        { 
+            group1.Enabled = true;
+            btn_cdat_open.Enabled = true;
+            btn_cdat_save.Enabled = true;
+            tbx_PSPx_limit.Enabled = true;
+            polynominal_p1p2.Enabled = true;
+            polynominal_T1.Enabled = true;
+            polynominal_T2.Enabled = true;
+            btn_save_rdata.Enabled = true;
+            btn_load_rdata.Enabled = true;
+            btn_del_rdata.Enabled=true;
+            btn_Sentslow.Enabled = true;
+            btn_SentConf.Enabled = true;
+            btn_DIAG.Enabled = true;
+            btn_T.Enabled = true;
+            button1.Enabled = true;
+            btn_load_sfr.Enabled = true;
+            btn_save_sfr.Enabled = true;
+            btn_Write_NVM.Enabled = true;
+            btn_READ_NVM.Enabled =true;
+            btnCalibration.Enabled = true;
+            btn_verify.Enabled = true;
+            group2.Enabled = true;
+        }
+        private void production()
+        {
+            group1.Enabled = true;
+            btn_cdat_open.Enabled = true;
+            btn_cdat_save.Enabled = true;
+            tbx_PSPx_limit.Enabled = true;
+            polynominal_p1p2.Enabled = true;
+            polynominal_T1.Enabled = true;
+            polynominal_T2.Enabled = true;
+            btn_save_rdata.Enabled = true;
+            btn_load_rdata.Enabled = true;
+            btn_del_rdata.Enabled = true;
+            btn_Sentslow.Enabled = false;
+            btn_SentConf.Enabled = false;
+            btn_DIAG.Enabled = false;
+            btn_T.Enabled = true;
+            button1.Enabled = true;
+            btn_load_sfr.Enabled = true;
+            btn_save_sfr.Enabled = true;
+            btn_Write_NVM.Enabled = true;
+            btn_READ_NVM.Enabled = true;
+            btnCalibration.Enabled = true;
+            btn_verify.Enabled = true;
+            group2.Enabled = true;
+        }
+        private void QC()
+        {
+            group1.Enabled = false;
+            btn_cdat_open.Enabled = false;
+            btn_cdat_save.Enabled = false;
+            tbx_PSPx_limit.Enabled = false;
+            polynominal_p1p2.Enabled = false;
+            polynominal_T1.Enabled = false;
+            polynominal_T2.Enabled = false;
+            btn_save_rdata.Enabled = false;
+            btn_load_rdata.Enabled = false;
+            btn_del_rdata.Enabled = false;
+            btn_Sentslow.Enabled = true;
+            btn_SentConf.Enabled = true;
+            btn_DIAG.Enabled = true;
+            btn_T.Enabled = true;
+            button1.Enabled = true;
+            btn_load_sfr.Enabled = true;
+            btn_save_sfr.Enabled = false;
+            btn_Write_NVM.Enabled = false;
+            btn_READ_NVM.Enabled = true;
+            btnCalibration.Enabled = false;
+            btn_verify.Enabled = true;
+            group2.Enabled = false;
+        }
         private void WriteComm(string strComm, int reLength, WorkRun fun)       //写命令
         {       //write specific command to SIO
             try
@@ -362,17 +431,10 @@ namespace E520._47标定
                 }
                 return true;
             }
-
-
-
-
             else
             {
                 return false;
             }
-
-
-
         }
         UInt16 j = 0, addr = 0x00;
         string[] strCom1 = new string[0x80];
@@ -510,234 +572,7 @@ namespace E520._47标定
                 return false;
             }
         }
-        /*
-        private bool SaveRdata(byte[] strRet)         //保存采样数据
-        {
-            string str = Encoding.Default.GetString(strRet);
-            int c = Convert.ToInt16(enabled_channel.SelectedItem.ToString(), 16);
-            if (str.Contains("#CCP 05"))       //开始写NVM
-            {
-                if (j < 11)
-                {
-                    j++;
-                    WriteComm(strCom1[j], 32, SaveRdata);//32
-                }
-                else
-                {
-                    if (enabled_channel.SelectedIndex < enabled_channel.Items.Count - 1)
-                    {
-                        enabled_channel.SelectedIndex++;
-                        string strCom;
-                        UInt16[] st = new UInt16[5];
-                        UInt16 nCrc;
-                        int iAddr;
-                        for (int i = 0; i < 8; i++)
-                        {
-                            NVM_code[i] = rdata[enabled_channel.SelectedIndex, i];
-                        }
-                        NVM_code[0x34] = rdata[enabled_channel.SelectedIndex, 8];
-                        NVM_code[0x35] = rdata[enabled_channel.SelectedIndex, 9];
-                        NVM_code[0x36] = rdata[enabled_channel.SelectedIndex, 10];
-                        CRC1();
-                        CRC2();
-                        //0x00~0x09
-                        for (j = 0; j <= 9; j++)
-                        {
-                            st[0] = 0x9D;
-                            st[1] = addr;
-                            st[2] = Convert.ToUInt16(NVM_code[j].Substring(0, 2), 16);
-                            st[3] = Convert.ToUInt16(NVM_code[j].Substring(2, 2), 16);
-                            nCrc = 0xFF;
-                            for (iAddr = 0; iAddr < 4; iAddr++)
-                            {
-                                nCrc = CRC_calc(st[iAddr], nCrc);
-                            }
-                            st[4] = nCrc;
-                            strCom = "CCP 5 9d " + addr.ToString("X2") + " " + NVM_code[j].Substring(0, 2) + " " + NVM_code[j].Substring(2, 2)
-                                + " " + st[4].ToString("X2") + " 1";
-                            strCom = strCom.ToLower();
-                            strCom1[j] = strCom;
-                            addr++;
-                        }
-                        //0x34~0x36
-                        addr = 0x34;
-                        for (j = 0; j <= 3; j++)
-                        {
-                            st[0] = 0x9D;
-                            st[1] = addr;
-                            st[2] = Convert.ToUInt16(NVM_code[j + 0x34].Substring(0, 2), 16);
-                            st[3] = Convert.ToUInt16(NVM_code[j + 0x34].Substring(2, 2), 16);
-                            nCrc = 0xFF;
-                            for (iAddr = 0; iAddr < 4; iAddr++)
-                            {
-                                nCrc = CRC_calc(st[iAddr], nCrc);
-                            }
-                            st[4] = nCrc;
-                            strCom = "CCP 5 9d " + addr.ToString("X2") + " " + NVM_code[j + 0x34].Substring(0, 2) + " " + NVM_code[j + 0x34].Substring(2, 2)
-                                + " " + st[4].ToString("X2") + " 1";
-                            strCom = strCom.ToLower();
-                            strCom1[j + 10] = strCom;
-                            addr++;
-                        }
-                        //0x75 CRC2
-                        st[0] = 0x9D;
-                        st[1] = 0x75;
-                        st[2] = Convert.ToUInt16(NVM_code[0x75].Substring(0, 2), 16);
-                        st[3] = Convert.ToUInt16(NVM_code[0x75].Substring(2, 2), 16);
-                        nCrc = 0xFF;
-                        for (iAddr = 0; iAddr < 4; iAddr++)
-                        {
-                            nCrc = CRC_calc(st[iAddr], nCrc);
-                        }
-                        st[4] = nCrc;
-                        strCom = "CCP 5 9d 75 " + NVM_code[0x75].Substring(0, 2) + " " + NVM_code[0x75].Substring(2, 2)
-                            + " " + st[4].ToString("X2") + " 1";
-                        strCom = strCom.ToLower();
-                        strCom1[13] = strCom;
-                        j = 0;
-                        addr = 0;
-                        WriteComm("POWEROFF", 15, SaveRdata);
-                    }
-                    else
-                    {
-                        WriteComm("POWEROFF", 15, OPENCOM);
-                    }
-                    ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add(item1_ID_value);
-                    item1.SubItems.Add("保存成功");
-                    listview_status.Items.RemoveAt(c);
-                    listview_status.Items.Insert(c, item1);
-                    j = 0;
-                }
-                return true;
-            }
-            else if (str.Contains("#POWEROFF"))
-            {
-                WriteComm("SETMUX " + enabled_channel.SelectedItem, 15, SaveRdata);
-                tbx_status.Text = " " + c.ToString("D") + " -- 正在保存采样数据";
-                //标定数据添加在这里
 
-                return true;
-            }
-            else if (str.Contains("#SETMUX "))
-            {
-                WriteComm("ENACONF", 15, SaveRdata);
-                return true;
-            }
-            else if (str.Contains("#ENACONF"))
-            {
-                WriteComm("CCP 2 ca cb 6", 35, SaveRdata);
-                return true;
-            }
-            else if (str.Contains("#CCP 02 ca"))
-            {
-                ListViewItem item1 = new ListViewItem();
-                item1_ID_value = str.Substring(21, 11);
-                item1.SubItems.Add(item1_ID_value);
-                listview_status.Items.RemoveAt(c);
-                listview_status.Items.Insert(c, item1);
-                WriteComm("CCP 2 ea eb 4", 32, SaveRdata);
-                return true;
-            }
-            else if (str.Contains("#CCP 02 ea"))
-            {
-                WriteComm(strCom1[0], 28, SaveRdata);
-                return true;
-            }
-
-            else
-            {                                               // handle errors
-                MessageBox.Show("数据通信失败!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-        private bool OpenRdata(byte[] strRet)         //读出采样数据
-        {
-            string str = Encoding.Default.GetString(strRet);
-            int c = Convert.ToInt16(enabled_channel.SelectedItem.ToString(), 16);
-
-            if (str.Contains("#CCP 03 93"))       
-            {
-                read_Rdata[j] = Convert.ToUInt16(str.Substring(24, 5).Remove(2, 1), 16);
-                if (j < 10)
-                {
-                    j++;
-                    WriteComm(strcom_rdata[j], 35, OpenRdata);//32
-                }
-                else
-                {
-                    if (enabled_channel.SelectedIndex < enabled_channel.Items.Count - 1)
-                    {
-                        enabled_channel.SelectedIndex++;
-                        
-                        j = 0;
-                        WriteComm("POWEROFF", 15, OpenRdata);
-                    }
-                    else
-                    {
-                        WriteComm("POWEROFF", 15, OPENCOM);
-                    }
-                    ListViewItem item3 = new ListViewItem();
-                    item3.SubItems.Add(read_Rdata[8].ToString());
-                    item3.SubItems.Add(item1_ID_value);
-                    item3.SubItems.Add((read_Rdata[0] / 10).ToString("f1"));
-                    item3.SubItems.Add((read_Rdata[1] / 10).ToString("f1"));
-                    item3.SubItems.Add((read_Rdata[2] / 10 - 40).ToString("f1"));
-                    item3.SubItems.Add((read_Rdata[3] / 10 - 40).ToString("f1"));
-                    item3.SubItems.Add(read_Rdata[4].ToString());
-                    item3.SubItems.Add(read_Rdata[5].ToString());
-                    item3.SubItems.Add(read_Rdata[6].ToString());
-                    item3.SubItems.Add(read_Rdata[7].ToString());
-                    item3.SubItems.Add("");
-                    item3.SubItems.Add("");
-                    item3.SubItems.Add("");
-                    item3.SubItems.Add("");
-                    item3.SubItems.Add(read_Rdata[9].ToString());
-                    item3.SubItems.Add(read_Rdata[10].ToString());
-                    listView_sample.Items.Add(item3);
-                    ListViewItem item1 = new ListViewItem();
-                    item1.SubItems.Add(item1_ID_value);
-                    item1.SubItems.Add("读取成功");
-                    listview_status.Items.RemoveAt(c);
-                    listview_status.Items.Insert(c, item1);
-                    j = 0;
-                }
-                return true;
-            }
-            else if (str.Contains("#POWEROFF"))
-            {
-                WriteComm("SETMUX " + enabled_channel.SelectedItem, 15, OpenRdata);
-                tbx_status.Text = " " + c.ToString("D") + " -- 正在读出采样数据";
-                return true;
-            }
-            else if (str.Contains("#SETMUX "))
-            {
-                WriteComm("ENACONF", 15, OpenRdata);
-                return true;
-            }
-            else if (str.Contains("#ENACONF"))
-            {
-                WriteComm("CCP 2 ca cb 6", 35, OpenRdata);
-                return true;
-            }
-            else if (str.Contains("#CCP 02 ca"))
-            {
-                ListViewItem item1 = new ListViewItem();
-                item1_ID_value = str.Substring(21, 11);
-                item1.SubItems.Add(item1_ID_value);
-                listview_status.Items.RemoveAt(c);
-                listview_status.Items.Insert(c, item1);
-                WriteComm(strcom_rdata[0], 35, OpenRdata);
-                return true;
-            }
-
-            else
-            {                                               // handle errors
-                MessageBox.Show("数据通信失败!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-        */
         private bool ReadFullEEPROM(byte[] strRet)         //写入NVM数据
         {
             string str = Encoding.Default.GetString(strRet);
@@ -3272,8 +3107,6 @@ namespace E520._47标定
                     listView_sample.Items.Add(item1);
                 }
             }
-
-
             myStreamReader.Close();
             tbx_status.Text = "采样数据导入成功";
         }
@@ -3295,7 +3128,35 @@ namespace E520._47标定
             WriteComm(".LOGLEVEL 0", 15, check_DUT);
         }
 
-        
+        private void Timer_user_Tick(object sender, EventArgs e)
+        {
+            if(character == "管理员")
+            {
+                Administrator();
+                Timer_user.Enabled = false;
+            }
+            else if (character == "标定人员")
+            {
+                production();
+                Timer_user.Enabled = false;
+            }
+            else if (character == "测试人员")
+            {
+                QC();
+                Timer_user.Enabled = false;
+            }
+            else if (character == "质检员")
+            {
+                QC();
+                Timer_user.Enabled = false;
+            }
+            else if(character =="未登录")
+            {
+               Close();
+            }
+        }
+
+
 
 
 
@@ -3348,8 +3209,6 @@ namespace E520._47标定
                         }
                     }
                 }
-
-
             }
             try
             {
@@ -3408,20 +3267,13 @@ namespace E520._47标定
             verify_shuzu[13] = tbx_T2_X2.Text;
             verify_shuzu[14] = tbx_T2_Y1.Text;
             verify_shuzu[15] = tbx_T2_Y2.Text;
-            //int aa= enabled_channel.Items.Count;
-            verify_shuzu[16] = sensor_xuanze.ToString();
-            //verify_shuzu[17] = aa.ToString();
-            //for(int  i = 0; i< aa; i++)
-            //{
-            //    verify_shuzu[18 + i] = enabled_channel.Items[i].ToString();
-            //}
-
+            verify_shuzu[16] = sensor_xuanze.ToString();           
             verify verify1 = new verify();
             verify1.Show();
         }
         private void btn_Close_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
     }

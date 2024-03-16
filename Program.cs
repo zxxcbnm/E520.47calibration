@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OlymmpicManagementSystem.Util;
+using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace E520._47标定
@@ -11,6 +13,7 @@ namespace E520._47标定
         [STAThread]
         static void Main()
         {
+            SqlHelper.ConStr = ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

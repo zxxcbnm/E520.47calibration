@@ -34,6 +34,8 @@
             this.Users_password = new System.Windows.Forms.TextBox();
             this.btn_Register = new System.Windows.Forms.Button();
             this.btn_login = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -42,7 +44,7 @@
             this.label1.Location = new System.Drawing.Point(44, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 4;
             this.label1.Text = "用户：";
             // 
             // label2
@@ -51,7 +53,7 @@
             this.label2.Location = new System.Drawing.Point(44, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 17);
-            this.label2.TabIndex = 0;
+            this.label2.TabIndex = 5;
             this.label2.Text = "密码：";
             // 
             // Users_name
@@ -60,8 +62,8 @@
             this.Users_name.MaxLength = 6;
             this.Users_name.Name = "Users_name";
             this.Users_name.Size = new System.Drawing.Size(100, 25);
-            this.Users_name.TabIndex = 1;
-            this.Users_name.UseSystemPasswordChar = true;
+            this.Users_name.TabIndex = 0;
+            this.Users_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Users_name_KeyPress);
             // 
             // Users_password
             // 
@@ -71,13 +73,14 @@
             this.Users_password.Size = new System.Drawing.Size(100, 25);
             this.Users_password.TabIndex = 1;
             this.Users_password.UseSystemPasswordChar = true;
+            this.Users_password.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Users_password_KeyPress);
             // 
             // btn_Register
             // 
             this.btn_Register.Location = new System.Drawing.Point(47, 107);
             this.btn_Register.Name = "btn_Register";
             this.btn_Register.Size = new System.Drawing.Size(70, 30);
-            this.btn_Register.TabIndex = 2;
+            this.btn_Register.TabIndex = 3;
             this.btn_Register.Text = "注册";
             this.btn_Register.UseVisualStyleBackColor = true;
             this.btn_Register.Click += new System.EventHandler(this.btn_Register_Click);
@@ -90,12 +93,24 @@
             this.btn_login.TabIndex = 2;
             this.btn_login.Text = "登录";
             this.btn_login.UseVisualStyleBackColor = true;
+            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::E520._47标定.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(228, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(89, 104);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // Users_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 161);
+            this.ClientSize = new System.Drawing.Size(334, 161);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_login);
             this.Controls.Add(this.btn_Register);
             this.Controls.Add(this.Users_password);
@@ -107,9 +122,11 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Users_login";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "登录窗口";
+            this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Users_login_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,5 +140,6 @@
         private System.Windows.Forms.TextBox Users_password;
         private System.Windows.Forms.Button btn_Register;
         private System.Windows.Forms.Button btn_login;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
