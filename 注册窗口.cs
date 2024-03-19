@@ -60,5 +60,10 @@ namespace E520._47标定
             Users_login users_Login = new Users_login();
             users_Login.Show();
         }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

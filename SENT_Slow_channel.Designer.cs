@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_exit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.Tb_data_code = new System.Windows.Forms.TextBox();
@@ -64,6 +65,7 @@
             this.Tbx_OEM8 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -212,6 +214,7 @@
             // 
             // btn_add
             // 
+            this.btn_add.Enabled = false;
             this.btn_add.Location = new System.Drawing.Point(54, 353);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(148, 30);
@@ -222,6 +225,7 @@
             // 
             // btn_insert_01
             // 
+            this.btn_insert_01.Enabled = false;
             this.btn_insert_01.Location = new System.Drawing.Point(54, 417);
             this.btn_insert_01.Name = "btn_insert_01";
             this.btn_insert_01.Size = new System.Drawing.Size(148, 30);
@@ -232,6 +236,7 @@
             // 
             // btn_change_data
             // 
+            this.btn_change_data.Enabled = false;
             this.btn_change_data.Location = new System.Drawing.Point(54, 481);
             this.btn_change_data.Name = "btn_change_data";
             this.btn_change_data.Size = new System.Drawing.Size(148, 30);
@@ -242,6 +247,7 @@
             // 
             // btn_delete
             // 
+            this.btn_delete.Enabled = false;
             this.btn_delete.Location = new System.Drawing.Point(54, 545);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(148, 30);
@@ -530,5 +536,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         public System.Windows.Forms.TextBox Tbx_OEM1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

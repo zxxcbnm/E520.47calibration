@@ -50,6 +50,12 @@ namespace E520._47标定
         };
        
         public static string character = "";
+        public static string users_name = "";
+        public static bool Slow_channel_Flag = false;
+        public static bool Sentconf_Flag = false;
+        public static bool Diagnosis_Flag = false;
+        public static bool Temperature_Flag = false;
+        public static bool Pressure_Flag = false;
         public static string[] slow_ID_Value = new string[42];
         public static UInt16[] NVM_code1 = new UInt16[128];
         public static string[] enable_channel1 = new string[16];
@@ -121,13 +127,12 @@ namespace E520._47标定
         string current_com;
         string[] portname;
         UInt16 cishu;
+        bool thread_Flag = true;
         private void Form1_Load(object sender, EventArgs e)
-        {
-            
-            listView_sample.Items.Clear();
+        {           
+            listView_sample.Items.Clear();           
             ThreadStart threadStart = new ThreadStart(() =>
             {
-                bool thread_Flag = true;
                 int COM_count;
                 while (thread_Flag)
                 {
@@ -139,8 +144,8 @@ namespace E520._47标定
                         {
                             PortName.Invoke(new Action(() =>
                             {
-                                PortName.Items.Clear();
-                                PortName.Enabled = false;
+                                
+                                COM_Port.Enabled = false;
                                 serialIsOpen = false;
                                 tbx_status.Text = "未找到串口，请检查";
                             }));
@@ -159,13 +164,23 @@ namespace E520._47标定
                                         PortName.Items.AddRange(portname);
                                     }
                                     if (PortName.SelectedIndex < 0) PortName.SelectedIndex = 0;        //Preselect Items                               
+                                    COM_Port.Text = portname[PortName.SelectedIndex];
                                     port.Close();
                                     port.PortName = portname[PortName.SelectedIndex];       //Initialize the serial port configuration, important settings
                                     port.BaudRate = 115200;
                                     port.DataBits = 8;
                                     port.StopBits = StopBits.One;
                                     port.Parity = Parity.None;
-                                    port.Open();                       //Open serial port
+                                    try
+                                    {
+                                        port.Open();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        thread_Flag = false;
+                                        MessageBox.Show(ex.Message + "请检查后重新启动。");
+                                        Close();
+                                    }                       //Open serial port
                                     port.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);//Create a event handler for received data
                                     port.NewLine = ":";               //Send data, at last add a Carriage Return (\r) to show the end of command                                                                      
                                     TimeOut.Enabled = true;
@@ -178,25 +193,26 @@ namespace E520._47标定
                         {
                             PortName.Invoke(new Action(() =>
                             {
-                                PortName.Enabled = false;
+                                COM_Port.Enabled = false;
                                 foreach (string n in portname)
                                 {
                                     if (n == current_com)
                                     {
-                                        PortName.Enabled = true;
+                                        COM_Port.Enabled = true;
                                         tbx_status.Text = "等待开始";
                                     }
                                 }
                             }));
-                            if (PortName.Enabled == true)
+                            if (COM_Port.Enabled == false)
                             {
-                                Thread.Sleep(1000); continue;
+                                serialIsOpen = false;
+                                port.Close();
+                                continue;
                             }
-                            serialIsOpen = false;
-                            port.Close();
+                            else Thread.Sleep(500);
                         }
                     }
-                    catch { thread_Flag = false; }
+                    catch { thread_Flag = false; Thread.CurrentThread.Abort(); }
                 }
             });
             Thread thread = new Thread(threadStart);
@@ -214,8 +230,7 @@ namespace E520._47标定
             CBX_MUX6.Checked = true;
             CBX_MUX7.Checked = true;
             Users_login users_Login = new Users_login();
-            users_Login.Show();
-            
+            users_Login.Show();          
         }
         private void Administrator()
         { 
@@ -240,7 +255,18 @@ namespace E520._47标定
             btn_READ_NVM.Enabled =true;
             btnCalibration.Enabled = true;
             btn_verify.Enabled = true;
+            
             group2.Enabled = true;
+            label32.Enabled = true;
+            label33.Enabled = true;
+            label34.Enabled = true;
+            label35.Enabled = true;
+            
+            Slow_channel_Flag = true;
+            Sentconf_Flag = true;
+            Diagnosis_Flag = true;
+            Temperature_Flag = true;
+            Pressure_Flag = true;
         }
         private void production()
         {
@@ -265,7 +291,12 @@ namespace E520._47标定
             btn_READ_NVM.Enabled = true;
             btnCalibration.Enabled = true;
             btn_verify.Enabled = true;
+            
             group2.Enabled = true;
+            label32.Enabled = true;
+            label33.Enabled = true;
+            label34.Enabled = true;
+            label35.Enabled = true;
         }
         private void QC()
         {
@@ -284,13 +315,19 @@ namespace E520._47标定
             btn_DIAG.Enabled = true;
             btn_T.Enabled = true;
             button1.Enabled = true;
-            btn_load_sfr.Enabled = true;
+            btn_load_sfr.Enabled = false;
             btn_save_sfr.Enabled = false;
             btn_Write_NVM.Enabled = false;
             btn_READ_NVM.Enabled = true;
             btnCalibration.Enabled = false;
             btn_verify.Enabled = true;
             group2.Enabled = false;
+            toolTip1.SetToolTip(btn_Sentslow, "当前用户只可查看。");
+            toolTip1.SetToolTip(btn_SentConf, "当前用户只可查看。");
+            toolTip1.SetToolTip(btn_DIAG, "当前用户只可查看。");
+            toolTip1.SetToolTip(btn_T, "当前用户只可查看。");
+            toolTip1.SetToolTip(button1, "当前用户只可查看。");
+
         }
         private void WriteComm(string strComm, int reLength, WorkRun fun)       //写命令
         {       //write specific command to SIO
@@ -1561,6 +1598,17 @@ namespace E520._47标定
                 StreamWriter myStreamWriter = new StreamWriter(myFileStream);
                 myStreamWriter.Flush();
                 #region  ***保存标定参数***
+                string p1p2 = "";
+                switch (polynominal_p1p2.SelectedIndex)
+                {
+                    case 0: p1p2 = "1"; break;
+                    case 1: p1p2 = "2"; break;
+                    case 2: p1p2 = "3"; break;
+                    case 3: p1p2 = "4"; break;
+                    case 4: p1p2 = "5"; break;
+                    case 5: p1p2 = "7"; break;
+                    default:break;
+                }
                 myStreamWriter.WriteLine(" //--------------------------------------------");
                 myStreamWriter.WriteLine("// E520.47标定参数  " + DateTime.Now.ToString("F"));
                 myStreamWriter.WriteLine("//---------------------------------------------");
@@ -1578,6 +1626,7 @@ namespace E520._47标定
                 myStreamWriter.Write("{0,10}", tbx_P1_X2.Text); myStreamWriter.WriteLine(" // " + "P1_X2[气压]");
                 myStreamWriter.Write("{0,10}", tbx_P1_Y1.Text); myStreamWriter.WriteLine(" // " + "P1_Y1[SENT]");
                 myStreamWriter.Write("{0,10}", tbx_P1_Y2.Text); myStreamWriter.WriteLine(" // " + "P1_Y2[SENT]");
+                myStreamWriter.Write("{0,10}", p1p2); myStreamWriter.WriteLine(" // " + polynominal_p1p2.SelectedItem.ToString());
                 myStreamWriter.WriteLine("//");
 
                 if (ckb_calibrate_P2.Checked)
@@ -1594,6 +1643,7 @@ namespace E520._47标定
                 myStreamWriter.Write("{0,10}", tbx_P2_X2.Text); myStreamWriter.WriteLine(" // " + "P2_X2[气压]");
                 myStreamWriter.Write("{0,10}", tbx_P2_Y1.Text); myStreamWriter.WriteLine(" // " + "P2_Y1[SENT]");
                 myStreamWriter.Write("{0,10}", tbx_P2_Y2.Text); myStreamWriter.WriteLine(" // " + "P2_Y2[SENT]");
+                myStreamWriter.Write("{0,10}", p1p2); myStreamWriter.WriteLine(" // " + polynominal_p1p2.SelectedItem.ToString());
                 myStreamWriter.WriteLine("//");
 
                 if (ckb_calibrate_T1.Checked)
@@ -1610,6 +1660,8 @@ namespace E520._47标定
                 myStreamWriter.Write("{0,10}", tbx_T1_X2.Text); myStreamWriter.WriteLine(" // " + "T1_X2[℃]");
                 myStreamWriter.Write("{0,10}", tbx_T1_Y1.Text); myStreamWriter.WriteLine(" // " + "T1_Y1[SENT]");
                 myStreamWriter.Write("{0,10}", tbx_T1_Y2.Text); myStreamWriter.WriteLine(" // " + "T1_Y2[SENT]");
+                myStreamWriter.Write("{0,10}", polynominal_T1.SelectedIndex.ToString());
+                myStreamWriter.WriteLine(" // " + polynominal_T1.SelectedItem.ToString());
                 myStreamWriter.WriteLine("//");
 
                 if (ckb_calibrate_T2.Checked)
@@ -1626,12 +1678,11 @@ namespace E520._47标定
                 myStreamWriter.Write("{0,10}", tbx_T2_X2.Text); myStreamWriter.WriteLine(" // " + "T2_X2[℃]");
                 myStreamWriter.Write("{0,10}", tbx_T2_Y1.Text); myStreamWriter.WriteLine(" // " + "T2_Y1[SENT]");
                 myStreamWriter.Write("{0,10}", tbx_T2_Y2.Text); myStreamWriter.WriteLine(" // " + "T2_Y2[SENT]");
+                myStreamWriter.Write("{0,10}", polynominal_T2.SelectedIndex.ToString());
+                myStreamWriter.WriteLine(" // " + polynominal_T2.SelectedItem.ToString());
                 myStreamWriter.WriteLine("//");
 
                 myStreamWriter.Write("{0,10}", tbx_PSPx_limit.Text); myStreamWriter.WriteLine(" // PSPx 限制+-% FS");
-                myStreamWriter.Write(polynominal_p1p2.SelectedItem.ToString().PadLeft(11)); myStreamWriter.WriteLine(" // 标定选择 P1/P2");
-                myStreamWriter.Write(polynominal_T1.SelectedItem.ToString().PadLeft(11)); myStreamWriter.WriteLine(" // 标定选择 T1");
-                myStreamWriter.Write(polynominal_T2.SelectedItem.ToString().PadLeft(11)); myStreamWriter.WriteLine(" // 标定选择 T2");
                 myStreamWriter.WriteLine("// 结束");
                 #endregion
                 myStreamWriter.Flush();
@@ -1667,6 +1718,32 @@ namespace E520._47标定
                 tbx_P1_Y1.Text = line.Substring(0, 10).Replace(" ", "");
                 line = myStreamReader.ReadLine();
                 tbx_P1_Y2.Text = line.Substring(0, 10).Replace(" ", "");
+                //标定选择 P1/P2             
+                line = myStreamReader.ReadLine().Substring(0, 10).Replace(" ", "");
+                if (line.Contains("1"))
+                {
+                    polynominal_p1p2.SelectedIndex = 0;
+                }
+                else if (line.Contains("2"))
+                {
+                    polynominal_p1p2.SelectedIndex = 1;
+                }
+                else if (line.Contains("3"))
+                {
+                    polynominal_p1p2.SelectedIndex = 2;
+                }
+                else if (line.Contains("4"))
+                {
+                    polynominal_p1p2.SelectedIndex = 3;
+                }
+                else if (line.Contains("5"))
+                {
+                    polynominal_p1p2.SelectedIndex = 4;
+                }
+                else if (line.Contains("7"))
+                {
+                    polynominal_p1p2.SelectedIndex = 5;
+                }
                 line = myStreamReader.ReadLine();
                 //第2组
                 line = myStreamReader.ReadLine();
@@ -1683,6 +1760,7 @@ namespace E520._47标定
                 line = myStreamReader.ReadLine();
                 tbx_P2_Y2.Text = line.Substring(0, 10).Replace(" ", "");
                 line = myStreamReader.ReadLine();
+                line = myStreamReader.ReadLine();//忽略p1p2选择
                 //第3组
                 line = myStreamReader.ReadLine();
                 if (line.Substring(0, 10).Contains("0"))
@@ -1697,6 +1775,28 @@ namespace E520._47标定
                 tbx_T1_Y1.Text = line.Substring(0, 10).Replace(" ", "");
                 line = myStreamReader.ReadLine();
                 tbx_T1_Y2.Text = line.Substring(0, 10).Replace(" ", "");
+                //标定选择 T1
+                line = myStreamReader.ReadLine().Substring(0, 10).Replace(" ", "");
+                if (line.Contains("0"))
+                {
+                    polynominal_T1.SelectedIndex = 0;
+                }
+                else if (line.Contains("1"))
+                {
+                    polynominal_T1.SelectedIndex = 1;
+                }
+                else if (line.Contains("2"))
+                {
+                    polynominal_T1.SelectedIndex = 2;
+                }
+                else if (line.Contains("3"))
+                {
+                    polynominal_T1.SelectedIndex = 3;
+                }
+                else if (line.Contains("4"))
+                {
+                    polynominal_T1.SelectedIndex = 4;
+                }
                 line = myStreamReader.ReadLine();
                 //第4组
                 line = myStreamReader.ReadLine();
@@ -1712,64 +1812,8 @@ namespace E520._47标定
                 tbx_T2_Y1.Text = line.Substring(0, 10).Replace(" ", "");
                 line = myStreamReader.ReadLine();
                 tbx_T2_Y2.Text = line.Substring(0, 10).Replace(" ", "");
-                line = myStreamReader.ReadLine();
-                //限制+-% FS
-                line = myStreamReader.ReadLine();
-                //标定选择 P1/P2
-                tbx_PSPx_limit.Text = line.Substring(0, 10).Replace(" ", "");
-                line = myStreamReader.ReadLine();
-                if(line.Contains("一阶 p，T = 常量"))
-                {
-                    polynominal_p1p2.SelectedIndex = 0;
-                }
-                else if(line.Contains("一阶 p，一阶 T"))
-                {
-                    polynominal_p1p2.SelectedIndex = 1;
-                }
-                else if (line.Contains("一阶 p，一阶 T"))
-                {
-                    polynominal_p1p2.SelectedIndex = 2;
-                }
-                else if (line.Contains("一阶 p，二阶 T"))
-                {
-                    polynominal_p1p2.SelectedIndex = 3;
-                }
-                else if (line.Contains("二阶 p，T = 常量"))
-                {
-                    polynominal_p1p2.SelectedIndex = 4;
-                }
-                else if (line.Contains("二阶 p，二阶 T"))
-                {
-                    polynominal_p1p2.SelectedIndex = 5;
-                }
-                else if (line.Contains("二阶 p，三阶 T"))
-                {
-                    polynominal_p1p2.SelectedIndex = 6;
-                }
-                //标定选择 T1
-                line = myStreamReader.ReadLine();
-                if (line.Contains("仅TADC值"))
-                {
-                    polynominal_T1.SelectedIndex = 0;
-                }
-                else if (line.Contains("T = 常数"))
-                {
-                    polynominal_T1.SelectedIndex = 1;
-                }
-                else if (line.Contains("一阶多项式"))
-                {
-                    polynominal_T1.SelectedIndex = 2;
-                }
-                else if (line.Contains("二阶多项式"))
-                {
-                    polynominal_T1.SelectedIndex = 3;
-                }
-                else if (line.Contains("三阶多项式"))
-                {
-                    polynominal_T1.SelectedIndex = 4;
-                }
                 //标定选择 T2
-                line = myStreamReader.ReadLine();
+                line = myStreamReader.ReadLine().Substring(0, 10).Replace(" ", "");
                 if (line.Contains("仅TADC值"))
                 {
                     polynominal_T2.SelectedIndex = 0;
@@ -1791,15 +1835,10 @@ namespace E520._47标定
                     polynominal_T2.SelectedIndex = 4;
                 }
                 line = myStreamReader.ReadLine();
-                //检查
-                if(line.Contains("结束"))
-                {
-                    tbx_status.Text = "标定参数导入成功";
-                }
-                else
-                {
-                    tbx_status.Text = "标定参数导入失败，请检查文件";
-                }
+                //限制+-% FS
+                line = myStreamReader.ReadLine();
+                tbx_PSPx_limit.Text = line.Substring(0, 10).Replace(" ", "");
+                tbx_status.Text = "标定参数导入成功";
 #endregion
                 myStreamReader.Close();
             }
@@ -3034,12 +3073,12 @@ namespace E520._47标定
 
         private void tbx_PSPx_limit_TextChanged(object sender, EventArgs e)
         {
-            if (tbx_PSPx_limit.Text == "") tbx_PSPx_limit.Text = "3.0";
+            if (tbx_PSPx_limit.Text == "") tbx_PSPx_limit.Text = "3";
             try
             {
                 uint a = Convert.ToUInt32(tbx_PSPx_limit.Text);
                 if (a > 50) tbx_PSPx_limit.Text = "50";
-                else if (a < 3) tbx_PSPx_limit.Text = "3.0";
+                else if (a < 3) tbx_PSPx_limit.Text = "3";
             }
             catch { MessageBox.Show("请输入正确数字,范围3~50", "格式错误"); }
         }
@@ -3133,21 +3172,25 @@ namespace E520._47标定
             if(character == "管理员")
             {
                 Administrator();
+                User_type.Text = users_name + "   " + character;
                 Timer_user.Enabled = false;
             }
             else if (character == "标定人员")
             {
                 production();
+                User_type.Text = users_name + "   " + character;
                 Timer_user.Enabled = false;
             }
             else if (character == "测试人员")
             {
                 QC();
+                User_type.Text = users_name + "   " + character;
                 Timer_user.Enabled = false;
             }
             else if (character == "质检员")
             {
                 QC();
+                User_type.Text = users_name + "   " + character;
                 Timer_user.Enabled = false;
             }
             else if(character =="未登录")
@@ -3156,10 +3199,10 @@ namespace E520._47标定
             }
         }
 
-
-
-
-
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Date_Time.Text = DateTime.Now.ToString("g");
+        }
 
         //bool first_sample = true;
         private void tbx_cishu_TextChanged(object sender, EventArgs e)

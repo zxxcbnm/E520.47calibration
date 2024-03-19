@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbn_P_H3 = new System.Windows.Forms.RadioButton();
@@ -107,6 +108,7 @@
             this.pbx_error = new System.Windows.Forms.PictureBox();
             this.tbx_p1_p2 = new System.Windows.Forms.TextBox();
             this.lbl_p1_p2 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1131,5 +1133,6 @@
         private System.Windows.Forms.PictureBox pbx_error;
         private System.Windows.Forms.TextBox tbx_p1_p2;
         private System.Windows.Forms.Label lbl_p1_p2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -18,6 +18,24 @@ namespace E520._47标定
 
         private void SentConf_Load(object sender, EventArgs e)
         {
+            if (Form1.Sentconf_Flag == false)
+            {
+                // 关联 ToolTip 控件和其他控件
+                toolTip1.SetToolTip(btn_Save, "修改内容不会保存。");
+                toolTip1.SetToolTip(groupBox1, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox2, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox3, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox4, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox5, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox6, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox7, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox8, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(tbx_TICK, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(tbx_pp, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(cbx_pp, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(tbx_p1_p2, "当前账户修改无效，请使用管理员登录。");
+                btn_Save.Text = "退出";
+            }
             rbx_I2C_CTRL.Text = "0x" + Form1.NVM_code[0x3A].Substring(2, 2);
             tbx_SENTCONF1.Text = "0x" + Form1.NVM_code[0x3D].Substring(2, 2);
             tbx_SENTCONF2.Text = "0x" + Form1.NVM_code[0x3D].Substring(0, 2);
@@ -635,6 +653,11 @@ namespace E520._47标定
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            if (btn_Save.Text == "退出")
+            {
+                Close();
+                return;
+            }
             if (pbx_error.Visible == true)
             {
                 MessageBox.Show("暂停脉冲(PP)设定值低于阈值，请重新输入", "保存失败");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace E520._47标定
 {
@@ -33,6 +34,19 @@ namespace E520._47标定
 
         private void Pressure_Load(object sender, EventArgs e)
         {
+            if(Form1.Pressure_Flag == false)
+            {
+                // 关联 ToolTip 控件和其他控件
+                toolTip1.SetToolTip(btn_Save, "修改内容不会保存。");
+                toolTip1.SetToolTip(groupBox1, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox2, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox3, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(groupBox4, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(cbx_PV_EN, "当前账户修改无效，请使用管理员登录。");
+                toolTip1.SetToolTip(cbx_p2_EN, "当前账户修改无效，请使用管理员登录。");
+                btn_Save.Text = "退出";
+            }
+
             tbx_POFFS1_PGAIN1.Text = "0x" + Form1.NVM_code[0x3B];
             tbx_POFFS2_PGAIN2.Text = "0x" + Form1.NVM_code[0x3C];
             tbx_PV_LIM.Text = "0x" + Form1.NVM_code[0x44];
@@ -786,6 +800,11 @@ namespace E520._47标定
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            if (btn_Save.Text == "退出")
+            {
+                Close();
+                return;
+            }
             Form1.NVM_code[0x3F] = ERR_EN2_1.ToString("X4");
             Form1.NVM_code[0x3B] = POFFS1_PGAIN1.ToString("X4");
             Form1.NVM_code[0x3C] = POFFS2_PGAIN2.ToString("X4");

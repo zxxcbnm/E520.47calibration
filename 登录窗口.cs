@@ -42,6 +42,7 @@ namespace E520._47标定
             {
                 DataRow dataRow = dataTable.Rows[0];
                 Form1.character = dataRow["job"].ToString();
+                Form1.users_name = name;
                 //MessageBox.Show(Form1.character, "提示");
                 Close();
             }
