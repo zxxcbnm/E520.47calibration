@@ -10,24 +10,23 @@ using System.Threading;
 using System.Windows.Forms;
 using static E520._47标定.Calibration;
 
-
 namespace E520._47标定
 {
-
     public partial class Form1 : Form
     {
         public static SerialPort port = new SerialPort();
-
+        public static SerialPort COMT = new SerialPort();
+        public static SerialPort COMP = new SerialPort();
         public Form1()
         {
             InitializeComponent();
             DoubleBufferListView.DoubleBufferedListView(listview_status, true);
             DoubleBufferListView.DoubleBufferedListView(listView_sample, true);
-
             string[] portname = SerialPort.GetPortNames();   //Get the serial ports
             PortName.Items.AddRange(portname);   //Add to interface
             try { PortName.SelectedIndex = 0; }        //Preselect Items
             catch { }
+
         }
         public static string[] NVM_code = new string[]
         {   "0000","0000","0000","0000","0000","0000","0000","0000",//OEM[0~8]
@@ -48,20 +47,16 @@ namespace E520._47标定
             "F8DA","0000","0000","3E5F","5A52","33DD","6719","0001",//T2_Q1/2/3/4,LOCK2,CRC2,ID1/0,ID3/2
             "3065","0000","54DB","0A88","57DC","0000","0000","B87F"// A/F_TRIM,V_TRIM,M_TADC,N_TADC,OT_LIM,free,LOCK3,CRC3
         };
-       
-        public static string character = "";
-        public static string users_name = "";
-        public static bool Slow_channel_Flag = false;
-        public static bool Sentconf_Flag = false;
-        public static bool Diagnosis_Flag = false;
-        public static bool Temperature_Flag = false;
-        public static bool Pressure_Flag = false;
         public static string[] slow_ID_Value = new string[42];
         public static UInt16[] NVM_code1 = new UInt16[128];
         public static string[] enable_channel1 = new string[16];
         public static UInt16 selected_channel;
-        bool serialIsOpen = false;  //ture放在了标定键，false放在了导入dfr键。写入NVM只判断，不更改。
-        public static int reLen;
+
+        bool serialIsOpen = false;
+        bool COMT_serialIsOpen = false;
+        bool COMP_serialIsOpen = false;
+        public static int reLen, treLen, preLen;
+
         UInt32 P1_sample_sum, P2_sample_sum, T1_sample_sum, T2_sample_sum;
         string ID_sample, PSP1_sample, PSP2_sample, PSP1_DAC, PSP2_DAC;
         UInt16 Sample_selected;
@@ -69,10 +64,23 @@ namespace E520._47标定
         string[,] Calibration_code = new string[15, 44];
         bool cabliration_falg = false;
 
-        //set the delegate callback function
+        string current_com, COMT_current_com, COMP_current_com;
+        bool thread_Flag = true;
+        string[] portname;
+        UInt16 cishu;
+        public static bool Slow_channel_Flag = true;
+        public static bool Sentconf_Flag = true;
+        public static bool Diagnosis_Flag = true;
+        public static bool Temperature_Flag = true;
+        public static bool Pressure_Flag = true;
+        public static string character = "管理员";
+        public static string users_name;
+
         public delegate bool WorkRun(byte[] reComm);
         public static WorkRun workRun = null;
-        public bool WorkAndRun(byte[] reComm)
+        static WorkRun tworkRun = null;
+        static WorkRun pworkRun = null;
+        bool WorkAndRun(byte[] reComm)
         {
             TimeOut.Enabled = false;
             if (workRun != null)
@@ -82,17 +90,40 @@ namespace E520._47标定
             else
                 return false;
         }
+        bool tWorkAndRun(byte[] reComm)
+        {
+            TimeOut.Enabled = false;
+            if (tworkRun != null)
+            {
+                return tworkRun(reComm);
+            }
+            else
+                return false;
+        }
+        bool pWorkAndRun(byte[] reComm)
+        {
+            TimeOut.Enabled = false;
+            if (pworkRun != null)
+            {
+                return pworkRun(reComm);
+            }
+            else
+                return false;
+        }
         private void TimeOut_Tick(object sender, EventArgs e)
         {
             if (PortName.SelectedIndex < PortName.Items.Count - 1)
                 PortName.SelectedIndex++;
-            serialIsOpen = false;
+            else { PortName.SelectedIndex = 0; }
             TimeOut.Enabled = false;
-            tbx_status.Text = "未找到串口，请检查";
+            tbx_status.Text = "查找串口中....";
+            tbx_status.ForeColor = Color.OrangeRed;
         }
         List<byte> readBuf = new List<byte>();  //always triggered, when data is received
-        int returnNum;
-        int rxlen;
+        List<byte> treadBuf = new List<byte>();
+        List<byte> preadBuf = new List<byte>();
+        int returnNum, treturnNum, preturnNum;
+        int rxlen, trxlen, prxlen;
         void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             returnNum = reLen;
@@ -124,100 +155,172 @@ namespace E520._47标定
                 }
             });
         }
-        string current_com;
-        string[] portname;
-        UInt16 cishu;
-        bool thread_Flag = true;
-        private void Form1_Load(object sender, EventArgs e)
-        {           
-            listView_sample.Items.Clear();           
-            ThreadStart threadStart = new ThreadStart(() =>
+        void COMT_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            treturnNum = treLen;
+            trxlen = COMT.BytesToRead;                           // 读出接收到数据的长度
+            if (trxlen < treturnNum) { return; }
+            byte[] rxbuf = new byte[trxlen];
+            COMT.Read(rxbuf, 0, trxlen);
+            string hexString = BitConverter.ToString(rxbuf).Replace("-", "");
+            treadBuf.AddRange(rxbuf);
+            try
             {
-                int COM_count;
-                while (thread_Flag)
+                Invoke((EventHandler)delegate                      //跨线程调用匿名委托
                 {
-                    portname = SerialPort.GetPortNames();   //Get the serial ports
-                    COM_count = portname.Length;
-                    try
+                    if (treLen > 0)
                     {
-                        if ((portname.Length == 0) || ((portname.Length == 1) && (portname[0] == "COM1")))
+
+                        while (treadBuf.Count >= treturnNum)
                         {
-                            PortName.Invoke(new Action(() =>
+                            if (treadBuf[0] == 1)
                             {
-                                
-                                COM_Port.Enabled = false;
-                                serialIsOpen = false;
-                                tbx_status.Text = "未找到串口，请检查";
-                            }));
-                            Thread.Sleep(1000);
-                            continue;
-                        }
-                        if ((serialIsOpen == false) && (TimeOut.Enabled == false))
-                        {
-                            Invoke(new Action(() =>
-                            {
-                                if (serialIsOpen == false)
-                                {
-                                    if ((PortName.SelectedIndex >= PortName.Items.Count) || (PortName.Items.Count != COM_count))
-                                    {
-                                        PortName.Items.Clear();
-                                        PortName.Items.AddRange(portname);
-                                    }
-                                    if (PortName.SelectedIndex < 0) PortName.SelectedIndex = 0;        //Preselect Items                               
-                                    COM_Port.Text = portname[PortName.SelectedIndex];
-                                    port.Close();
-                                    port.PortName = portname[PortName.SelectedIndex];       //Initialize the serial port configuration, important settings
-                                    port.BaudRate = 115200;
-                                    port.DataBits = 8;
-                                    port.StopBits = StopBits.One;
-                                    port.Parity = Parity.None;
-                                    try
-                                    {
-                                        port.Open();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        thread_Flag = false;
-                                        MessageBox.Show(ex.Message + "请检查后重新启动。");
-                                        Close();
-                                    }                       //Open serial port
-                                    port.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);//Create a event handler for received data
-                                    port.NewLine = ":";               //Send data, at last add a Carriage Return (\r) to show the end of command                                                                      
-                                    TimeOut.Enabled = true;
-                                    WriteComm(".LOGLEVEL 0", 15, OPENCOM);
-                                }
-                            }));
-                        }
-                        else if (TimeOut.Enabled == true) continue;
-                        else
-                        {
-                            PortName.Invoke(new Action(() =>
-                            {
-                                COM_Port.Enabled = false;
-                                foreach (string n in portname)
-                                {
-                                    if (n == current_com)
-                                    {
-                                        COM_Port.Enabled = true;
-                                        tbx_status.Text = "等待开始";
-                                    }
-                                }
-                            }));
-                            if (COM_Port.Enabled == false)
-                            {
-                                serialIsOpen = false;
-                                port.Close();
-                                continue;
+                                tWorkAndRun(treadBuf.ToArray());
+                                treadBuf.Clear();
                             }
-                            else Thread.Sleep(500);
+                            else { treadBuf.RemoveAt(0); }       //循环等待#出现
                         }
                     }
-                    catch { thread_Flag = false; Thread.CurrentThread.Abort(); }
+                });
+            }
+            catch { return; }
+        }
+        void COMP_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            preturnNum = preLen;
+            prxlen = COMP.BytesToRead;                           // 读出接收到数据的长度
+            if (prxlen < preturnNum) { return; }
+            byte[] rxbuf = new byte[prxlen];
+            COMP.Read(rxbuf, 0, prxlen);
+            preadBuf.AddRange(rxbuf);
+            try
+            {
+                Invoke((EventHandler)delegate                      //跨线程调用匿名委托
+                {
+                    if (preLen > 0)
+                    {
+
+                        while (preadBuf.Count >= preturnNum)
+                        {
+                            if (preadBuf[0] == ':')
+                            {
+                                pWorkAndRun(preadBuf.ToArray());
+                                preadBuf.Clear();
+                            }
+                            else { preadBuf.RemoveAt(0); }       //循环等待:出现
+                        }
+                    }
+
+                });
+            }
+            catch { return; }
+        }
+
+        bool tongxin_Falg = false;
+        bool wendu_Falg = false;
+        bool yali_Falg = false;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //listView_sample.Items.Clear();
+            Date_Time.Text = DateTime.Now.ToString("g");
+            portname = SerialPort.GetPortNames();   //Get the serial ports            
+            string[] ComSave = new string[3];
+            ComSave[0] = Properties.Settings.Default.COMpath;
+            ComSave[1] = Properties.Settings.Default.COMTpath;
+            ComSave[2] = Properties.Settings.Default.COMPpath;
+
+            foreach (var n in portname)
+            {
+                if (n == ComSave[0])
+                {
+                    tongxin_Falg = true;
                 }
-            });
-            Thread thread = new Thread(threadStart);
-            thread.Priority = ThreadPriority.Lowest;
-            thread.Start();
+                else if (n == ComSave[1])
+                {
+                    wendu_Falg = true;
+                }
+                else if (n == ComSave[2])
+                {
+                    yali_Falg = true;
+                }
+            }
+            if (tongxin_Falg)
+            {
+                port.Close();
+                COM_Port.Text = ComSave[0];
+                port.PortName = ComSave[0];
+                port.BaudRate = 115200;
+                port.DataBits = 8;
+                port.StopBits = StopBits.One;
+                port.Parity = Parity.None;
+                port.WriteTimeout = 1000;
+                try
+                {
+                    port.Open();
+                }
+                catch (Exception ex)
+                {
+                    thread_Flag = false;
+                    MessageBox.Show(ex.Message + "请检查后重新启动。");
+                    Close();
+                }
+                port.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
+                port.NewLine = ":";
+                TimeOut.Enabled = true;
+                WriteComm(".LOGLEVEL 0", 15, OPENCOM);
+
+            }
+            if (wendu_Falg)
+            {
+                COMT.Close();
+                tbx_COM_T.Text = ComSave[1];
+                COMT.PortName = ComSave[1];
+                COMT.BaudRate = 9600;
+                COMT.DataBits = 8;
+                COMT.StopBits = StopBits.One;
+                COMT.Parity = Parity.None;
+                port.WriteTimeout = 1000;
+                try
+                {
+                    COMT.Open();
+                }
+                catch (Exception ex)
+                {
+                    thread_Flag = false;
+                    MessageBox.Show(ex.Message + "请检查后重新启动。");
+                    Close();
+                }
+                COMT.DataReceived += new SerialDataReceivedEventHandler(COMT_DataReceived);
+                TimeOut.Enabled = true;
+                WriteComT("0106000A00016808", 8, T_Communication);
+
+            }
+            if (yali_Falg)
+            {
+                COMP.Close();
+                tbx_COM_P.Text = ComSave[2];
+                COMP.PortName = ComSave[2];
+                COMP.BaudRate = 9600;
+                COMP.DataBits = 8;
+                COMP.StopBits = StopBits.One;
+                COMP.Parity = Parity.None;
+                port.WriteTimeout = 1000;
+                try
+                {
+                    COMP.Open();
+                }
+                catch (Exception ex)
+                {
+                    thread_Flag = false;
+                    MessageBox.Show(ex.Message + "请检查后重新启动。");
+                    Close();
+                }
+                COMP.DataReceived += new SerialDataReceivedEventHandler(COMP_DataReceived);
+                TimeOut.Enabled = true;
+                WriteComP(":OUTPut:STATe?", 13, P_Communication);
+
+            }
+            
             polynominal_p1p2.SelectedIndex = Properties.Settings.Default.p1p2_xuanze;
             polynominal_T1.SelectedIndex = Properties.Settings.Default.T1_xuanze;
             polynominal_T2.SelectedIndex = Properties.Settings.Default.T2_xuanze;
@@ -229,11 +332,269 @@ namespace E520._47标定
             CBX_MUX5.Checked = true;
             CBX_MUX6.Checked = true;
             CBX_MUX7.Checked = true;
-            Users_login users_Login = new Users_login();
-            users_Login.Show();          
+            //Users_login users_Login = new Users_login();
+            //users_Login.Show();          
+        }
+        private void timer_portcheck_Tick(object sender, EventArgs e)
+        {
+            timer_portcheck.Enabled = false;
+            #region 自动查找串口
+            ThreadStart threadStart = new ThreadStart(() =>
+            {
+                while (thread_Flag)
+                {
+                    portname = SerialPort.GetPortNames();
+                    tongxin_Falg = false;
+                    wendu_Falg = false;
+                    yali_Falg = false;
+                    try
+                    {
+                        foreach (var n in portname)
+                        {
+                            if (n == current_com)
+                            {
+                                tongxin_Falg = true;
+                            }
+                            else if (n == COMT_current_com)
+                            {
+                                wendu_Falg = true;
+                            }
+                            else if (n == COMP_current_com)
+                            {
+                                yali_Falg = true;
+                            }
+                        }
+                        if (tongxin_Falg && wendu_Falg && yali_Falg && serialIsOpen && COMT_serialIsOpen && COMP_serialIsOpen)
+                        {
+                            Thread.Sleep(1000);
+                            continue;
+                        }
+
+                        PortName.Invoke(new Action(() =>
+                        {
+                            PortName.Items.Clear();
+                            PortName.Items.AddRange(portname);
+                            if (tongxin_Falg == false)
+                            {
+                                COM_Port.Enabled = false;
+                                serialIsOpen = false;
+                                tbx_status.Text = "查找通信板串口中....";
+                                tbx_status.ForeColor = Color.OrangeRed;
+                            }
+                            else if (wendu_Falg == false)
+                            {
+                                tbx_COM_T.Enabled = false;
+                                COMT_serialIsOpen = false;
+                                tbx_status.Text = "查找温度传感器串口中....";
+                                tbx_status.ForeColor = Color.OrangeRed;
+                            }
+                            else if (yali_Falg == false)
+                            {
+                                tbx_COM_P.Enabled = false;
+                                COMP_serialIsOpen = false;
+                                tbx_status.Text = "查找压力控制器串口中....";
+                                tbx_status.ForeColor = Color.OrangeRed;
+                            }
+                        }));
+
+                        if (serialIsOpen == false)
+                        {
+                            bool a = false, b = false, a1 = false, b1 = false;
+                            List<string> list = new List<string>(portname);
+
+                            foreach (string n in list)
+                            {
+                                if (n == COMT_current_com) a = true;
+                                else if (n == COMP_current_com) b = true;
+                                else if (n == tbx_COM_T.Text) a1 = true;
+                                else if (n == tbx_COM_P.Text) b1 = true;
+                            }
+                            if (a) list.Remove(COMT_current_com);
+                            if (b) list.Remove(COMP_current_com);
+                            if (a1) list.Remove(tbx_COM_T.Text);
+                            if (b1) list.Remove(tbx_COM_P.Text);
+                            if (list.Count == 0)
+                            {
+                                Thread.Sleep(1000);
+                                continue;
+                            }
+                            Invoke(new Action(() =>
+                            {
+                                if (a) PortName.Items.Remove(COMT_current_com);
+                                if (b) PortName.Items.Remove(COMP_current_com);
+                                if (a1) PortName.Items.Remove(tbx_COM_T.Text);
+                                if (b1) PortName.Items.Remove(tbx_COM_P.Text);
+                                portname = list.ToArray();
+                                if (PortName.SelectedIndex < 0) PortName.SelectedIndex = 0;
+                                if (PortName.SelectedIndex >= PortName.Items.Count)
+                                {
+                                    PortName.Items.Clear();
+                                    PortName.Items.AddRange(portname);
+                                }
+                                COM_Port.Text = portname[PortName.SelectedIndex];
+                                port.Close();
+                                port.PortName = portname[PortName.SelectedIndex];
+                                port.BaudRate = 115200;
+                                port.DataBits = 8;
+                                port.StopBits = StopBits.One;
+                                port.Parity = Parity.None;
+                                port.WriteTimeout = 1000;
+                                try
+                                {
+                                    port.Open();
+                                }
+                                catch (Exception ex)
+                                {
+                                    thread_Flag = false;
+                                    MessageBox.Show(ex.Message + "请检查后重新启动。");
+                                    Close();
+                                }
+                                port.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);//Create a event handler for received data
+                                port.NewLine = ":";               //Send data, at last add a Carriage Return (\r) to show the end of command                                                                      
+                                TimeOut.Enabled = true;
+                                WriteComm(".LOGLEVEL 0", 15, OPENCOM);
+                            }));
+                        }
+
+                        //温度串口
+                        if (COMT_serialIsOpen == false)
+                        {
+                            List<string> list = new List<string>(portname);
+                            bool c = false, d = false, c1 = false, d1 = false;
+                            foreach (string n in list)
+                            {
+                                if (n == current_com) c = true;
+                                else if (n == COMP_current_com) d = true;
+                                else if (n == COM_Port.Text) c1 = true;
+                                else if (n == tbx_COM_P.Text) d1 = true;
+                            }
+                            if (c) list.Remove(current_com);
+                            if (d) list.Remove(COMP_current_com);
+                            if (c1) list.Remove(COM_Port.Text);
+                            if (d1) list.Remove(tbx_COM_P.Text);
+                            if (list.Count == 0)
+                            {
+                                Thread.Sleep(1000);
+                                continue;
+                            }
+                            Invoke(new Action(() =>
+                            {
+                                if (c) PortName.Items.Remove(current_com);
+                                if (d) PortName.Items.Remove(COMP_current_com);
+                                if (c1) PortName.Items.Remove(COM_Port.Text);
+                                if (d1) PortName.Items.Remove(tbx_COM_P.Text);
+                                portname = list.ToArray();
+                                if (PortName.SelectedIndex < 0) PortName.SelectedIndex = 0;
+                                if (PortName.SelectedIndex >= PortName.Items.Count)
+                                {
+                                    PortName.Items.Clear();
+                                    PortName.Items.AddRange(portname);
+                                }
+                                tbx_COM_T.Text = portname[PortName.SelectedIndex];
+                                COMT.Close();
+                                COMT.PortName = portname[PortName.SelectedIndex];
+                                COMT.BaudRate = 9600;
+                                COMT.DataBits = 8;
+                                COMT.StopBits = StopBits.One;
+                                COMT.Parity = Parity.None;
+                                port.WriteTimeout = 1000;
+                                try
+                                {
+                                    COMT.Open();
+                                }
+                                catch (Exception ex)
+                                {
+                                    thread_Flag = false;
+                                    MessageBox.Show(ex.Message + "请检查后重新启动。");
+                                    Close();
+                                }
+                                COMT.DataReceived += new SerialDataReceivedEventHandler(COMT_DataReceived);
+                                TimeOut.Enabled = true;
+                                WriteComT("0106000A00016808", 8, T_Communication);
+                            }));
+                        }
+
+                        //压力串口
+                        if (COMP_serialIsOpen == false)
+                        {
+                            List<string> list = new List<string>(portname);
+                            bool g = false, h = false, g1 = false, h1 = false;
+                            foreach (string n in list)
+                            {
+                                if (n == current_com) g = true;
+                                else if (n == COMT_current_com) h = true;
+                                else if (n == COM_Port.Text) g1 = true;
+                                else if (n == tbx_COM_T.Text) h1 = true;
+                            }
+                            if (g) list.Remove(current_com);
+                            if (h) list.Remove(COMT_current_com);
+                            if (g1) list.Remove(COM_Port.Text);
+                            if (h1) list.Remove(tbx_COM_T.Text);
+                            if (list.Count == 0)
+                            {
+                                Thread.Sleep(1000);
+                                continue;
+                            }
+                            Invoke(new Action(() =>
+                            {
+                                if (g) PortName.Items.Remove(current_com);
+                                if (h) PortName.Items.Remove(COMT_current_com);
+                                if (g1) PortName.Items.Remove(COM_Port.Text);
+                                if (h1) PortName.Items.Remove(tbx_COM_T.Text);
+                                portname = list.ToArray();
+                                if (PortName.SelectedIndex < 0) PortName.SelectedIndex = 0;
+                                if (PortName.SelectedIndex >= PortName.Items.Count)
+                                {
+                                    PortName.Items.Clear();
+                                    PortName.Items.AddRange(portname);
+                                }
+                                tbx_COM_P.Text = portname[PortName.SelectedIndex];
+                                COMP.Close();
+                                COMP.PortName = portname[PortName.SelectedIndex];
+                                COMP.BaudRate = 9600;
+                                COMP.DataBits = 8;
+                                COMP.StopBits = StopBits.One;
+                                COMP.Parity = Parity.None;
+                                port.WriteTimeout = 1000;
+                                try
+                                {
+                                    COMP.Open();
+                                }
+                                catch (Exception ex)
+                                {
+                                    thread_Flag = false;
+                                    MessageBox.Show(ex.Message + "请检查后重新启动。");
+                                    Close();
+                                }
+                                COMP.DataReceived += new SerialDataReceivedEventHandler(COMP_DataReceived);
+                                TimeOut.Enabled = true;
+                                WriteComP(":OUTPut:STATe?", 13, P_Communication);
+                            }));
+                        }
+                        Thread.Sleep(500);
+                    }
+                    catch
+                    {
+                        thread_Flag = false;
+                        Thread.CurrentThread.Abort();
+                    }
+                }
+            });
+            Thread thread = new Thread(threadStart);
+            thread.Priority = ThreadPriority.Lowest;
+            thread.Start();
+            #endregion
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Date_Time.Text = DateTime.Now.ToString("g");
+            if (tbx_COM_T.Enabled)//COMT_serialIsOpen
+                WriteComT("010310010001D10A", 7, Temperature);
+            if (tbx_COM_P.Enabled)//COMP_serialIsOpen
+                WriteComP(":SENS:INL?", 27, Pressure);            
         }
         private void Administrator()
-        { 
+        {
             group1.Enabled = true;
             btn_cdat_open.Enabled = true;
             btn_cdat_save.Enabled = true;
@@ -243,7 +604,7 @@ namespace E520._47标定
             polynominal_T2.Enabled = true;
             btn_save_rdata.Enabled = true;
             btn_load_rdata.Enabled = true;
-            btn_del_rdata.Enabled=true;
+            btn_del_rdata.Enabled = true;
             btn_Sentslow.Enabled = true;
             btn_SentConf.Enabled = true;
             btn_DIAG.Enabled = true;
@@ -252,16 +613,16 @@ namespace E520._47标定
             btn_load_sfr.Enabled = true;
             btn_save_sfr.Enabled = true;
             btn_Write_NVM.Enabled = true;
-            btn_READ_NVM.Enabled =true;
+            btn_READ_NVM.Enabled = true;
             btnCalibration.Enabled = true;
             btn_verify.Enabled = true;
-            
+
             group2.Enabled = true;
             label32.Enabled = true;
             label33.Enabled = true;
             label34.Enabled = true;
             label35.Enabled = true;
-            
+
             Slow_channel_Flag = true;
             Sentconf_Flag = true;
             Diagnosis_Flag = true;
@@ -291,7 +652,7 @@ namespace E520._47标定
             btn_READ_NVM.Enabled = true;
             btnCalibration.Enabled = true;
             btn_verify.Enabled = true;
-            
+
             group2.Enabled = true;
             label32.Enabled = true;
             label33.Enabled = true;
@@ -344,6 +705,157 @@ namespace E520._47标定
         }
         bool write_flag = false;
         bool SETMUX_Flag = false;
+        // 将十六进制字符串转换为字节数组
+        private static byte[] HexStringToByteArray(string hexString)
+        {
+            int length = hexString.Length / 2;
+            byte[] result = new byte[length];
+
+            for (int i = 0; i < length; ++i)
+            {
+                result[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            }
+            return result;
+        }
+        private void WriteComT(string strComm, int reLength, WorkRun fun)       //写命令
+        {       //write specific command to SIO
+            try
+            {
+                byte[] sendBuffer = HexStringToByteArray(strComm);
+                COMT.Write(sendBuffer, 0, sendBuffer.Length);
+                treLen = reLength;
+                tworkRun = fun;                          //set corresponding callback function 标记发出的是哪个命令，方便接收到的数据对接
+            }
+            catch (Exception ex)
+            {                                   // handle errors
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void WriteComP(string strComm, int reLength, WorkRun fun)       //写命令
+        {       //write specific command to SIO
+            try
+            {
+                COMP.Write(strComm + "\r");
+                preLen = reLength;
+                pworkRun = fun;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        double actual_temperature;
+        double actual_pressure;
+        bool T_Communication(byte[] strRet)
+        {
+            if ((strRet[0] == 1) && (strRet[1] == 3) && (strRet[2] == 2))
+            {
+                actual_temperature = (strRet[3] << 8) + strRet[4];
+                actual_temperature /= 10;
+                tbx_COMT.Text = actual_temperature.ToString("f1");
+                COMT_current_com = COMT.PortName;
+                Properties.Settings.Default.COMTpath = COMT.PortName;
+                Properties.Settings.Default.Save();
+                COMT_serialIsOpen = true;
+                tbx_COM_T.Enabled = true;
+                if (serialIsOpen && COMT_serialIsOpen && COMP_serialIsOpen)
+                {
+                    tbx_status.Text = "待机中，等待开始";
+                    tbx_status.ForeColor = Color.Black;
+                }
+                return false;
+            }
+            else if ((strRet[0] == 1) && (strRet[1] == 6) && (strRet[2] == 0))
+            {
+                Thread.Sleep(5);
+                WriteComT("010310010001D10A", 7, T_Communication);
+                return true;
+            }
+            else { return false; }
+        }
+        bool Temperature(byte[] strRet)
+        {
+            if ((strRet[0] == 1) && (strRet[1] == 3) && (strRet[2] == 2))
+            {
+                actual_temperature = (strRet[3] << 8) + strRet[4];
+                actual_temperature /= 10;
+                tbx_COMT.Text = actual_temperature.ToString("f1");
+            }
+            return false;
+        }
+        bool P_Communication(byte[] strRet)
+        {
+            string str = Encoding.Default.GetString(strRet);
+            if (str.Contains(":OUTP:STAT"))
+            {
+                COMP_current_com = COMP.PortName;
+                Properties.Settings.Default.COMPpath = COMP.PortName;
+                Properties.Settings.Default.Save();
+                COMP_serialIsOpen = true;
+                tbx_COM_P.Enabled = true;
+                if (serialIsOpen && COMT_serialIsOpen && COMP_serialIsOpen)
+                {
+                    tbx_status.Text = "待机中，等待开始";
+                    tbx_status.ForeColor = Color.Black;
+                }
+                WriteComP(":UNIT:PRES KPA", 5, P_Communication);
+                WriteComP(":UNIT:PRES?", 14, P_Communication);
+                return true;
+            }
+            else if (str.Contains(":UNIT:PRES KPA"))
+            {
+                WriteComP(":SOUR:PRES:RANG?", 26, P_Communication);
+                return true;
+            }
+            else if (str.Contains("bara"))
+            {
+                WriteComP(":SENS:INL?", 27, P_Communication);
+                return true;
+            }
+            else if (str.Contains("barg"))  //切换绝压
+            {
+                int a;
+                string[] str1 = str.Split('\"');
+                string[] str2 = str1[1].Split('.');
+                a = Convert.ToInt32(str2[0]);
+                WriteComP(":SOUR:RANGE \"" + (a + 1).ToString() + ".00bara\"", 5, P_Communication);
+                WriteComP(":SOUR:PRES:RANG?", 26, P_Communication);
+                return true;
+            }
+            else if (str.Contains(":SENS:PRES:INL"))
+            {
+                actual_pressure = Convert.ToDouble(str.Substring(15, 7));
+                tbx_COMP.Text = actual_pressure.ToString("f1");
+
+                return false;
+            }
+            else { return false; }
+        }
+        bool P_test(byte[] strRet)
+        {
+            string str = Encoding.Default.GetString(strRet);
+            if (str.Contains(":OUTP:STAT 0"))
+            {
+                WriteComP(":OUTPut:STATe ON", 5, P_test);
+                return false;
+            }
+            else if (str.Contains(":OUTP:STAT 1"))
+            {
+                return false;
+            }
+            else { return true; }
+        }
+        bool Pressure(byte[] strRet)
+        {
+            string str = Encoding.Default.GetString(strRet);
+            if (str.Contains(":SENS:PRES:INL"))
+            {
+                string[] str1 = str.Split('L');
+                actual_pressure = Convert.ToDouble(str1[1].Substring(1, 7));
+                tbx_COMP.Text = actual_pressure.ToString("f1");
+            }
+            return false;
+        }
 
         private bool OPENCOM(byte[] strRet)         //ENACONF     #ENACONF+06 : //15
         {
@@ -352,10 +864,12 @@ namespace E520._47标定
             if (str.Contains("#.LOGLEVEL"))
             {
                 current_com = port.PortName;
+                Properties.Settings.Default.COMpath = port.PortName;
+                Properties.Settings.Default.Save();
                 serialIsOpen = true;
+                COM_Port.Enabled = true;
                 WriteComm("SETMUX 00", 16, OPENCOM);
                 return true;
-
             }
             else if (str.Contains("#SETMUX 00") && (SETMUX_Flag == false))
             {
@@ -381,7 +895,8 @@ namespace E520._47标定
             }
             else if (str.Contains("#POWEROFF"))
             {
-                tbx_status.Text = "等待开始";
+                tbx_status.Text = "待机中，等待开始";
+                tbx_status.ForeColor = Color.Black;
                 return false;
             }
             else
@@ -970,8 +1485,8 @@ namespace E520._47标定
             string st = "";
             int[] xuhao_jihe = new int[30];
             double a, b, c, d, ee, f, g, h;
-            int T1_mode = Convert.ToInt32(NVM_code[0x68]) & 3;
-            int T2_mode = Convert.ToInt32(NVM_code[0x6E]) & 3;
+            int T1_mode = Convert.ToInt32(NVM_code[0x68], 16) & 3;
+            int T2_mode = Convert.ToInt32(NVM_code[0x6E], 16) & 3;
             bool T1_diode_Flag, T2_diode_Flag, T1_TSEN_Flag, T2_TSEN_Flag;
             ushort changwen_xu;
             double[] wendu = new double[4];
@@ -1419,10 +1934,12 @@ namespace E520._47标定
         private void btn_load_sfr_Click(object sender, EventArgs e)
         {
             openSfr.InitialDirectory = Properties.Settings.Default.Openpath;
+
             if (openSfr.ShowDialog() == DialogResult.OK)
             {
                 import_model.Text = Path.GetFileNameWithoutExtension(openSfr.FileName);
                 Properties.Settings.Default.Openpath = openSfr.InitialDirectory;
+                Properties.Settings.Default.Save();
                 FileStream myFileStream = new FileStream(openSfr.FileName, FileMode.Open, FileAccess.Read);
                 StreamReader myStreamReader = new StreamReader(myFileStream);
                 myStreamReader.BaseStream.Seek(0, SeekOrigin.Begin);
@@ -1449,6 +1966,7 @@ namespace E520._47标定
             if (saveSfr.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.Openpath = saveSfr.FileName;
+                Properties.Settings.Default.Save();
                 FileStream myFileStream = new FileStream(saveSfr.FileName, FileMode.Create, FileAccess.Write);
                 StreamWriter myStreamWriter = new StreamWriter(myFileStream);
                 myStreamWriter.Flush();
@@ -1594,6 +2112,7 @@ namespace E520._47标定
             if (saveCdat.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.Cdatpath = saveCdat.InitialDirectory;
+                Properties.Settings.Default.Save();
                 FileStream myFileStream = new FileStream(saveCdat.FileName, FileMode.Create, FileAccess.Write);
                 StreamWriter myStreamWriter = new StreamWriter(myFileStream);
                 myStreamWriter.Flush();
@@ -1607,12 +2126,12 @@ namespace E520._47标定
                     case 3: p1p2 = "4"; break;
                     case 4: p1p2 = "5"; break;
                     case 5: p1p2 = "7"; break;
-                    default:break;
+                    default: break;
                 }
                 myStreamWriter.WriteLine(" //--------------------------------------------");
                 myStreamWriter.WriteLine("// E520.47标定参数  " + DateTime.Now.ToString("F"));
                 myStreamWriter.WriteLine("//---------------------------------------------");
-                if(ckb_calibrate_P1.Checked)
+                if (ckb_calibrate_P1.Checked)
                 {
                     myStreamWriter.Write("{0,10}", "1");
                     myStreamWriter.WriteLine(" // 标定P1");
@@ -1693,9 +2212,10 @@ namespace E520._47标定
         private void btn_cdat_open_Click(object sender, EventArgs e)
         {
             openCdat.InitialDirectory = Properties.Settings.Default.Openpath;
-            if(openCdat.ShowDialog() == DialogResult.OK)
+            if (openCdat.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.Cdatpath = openCdat.InitialDirectory;
+                Properties.Settings.Default.Save();
                 FileStream myFileStream = new FileStream(openCdat.FileName, FileMode.Open, FileAccess.Read);
                 StreamReader myStreamReader = new StreamReader(myFileStream);
                 myStreamReader.BaseStream.Seek(0, SeekOrigin.Begin);
@@ -1711,7 +2231,7 @@ namespace E520._47标定
                 else if (line.Substring(0, 10).Contains("1"))
                     ckb_calibrate_P1.Checked = true;
                 line = myStreamReader.ReadLine();
-                tbx_P1_X1.Text = line.Substring(0, 10).Replace(" ","");
+                tbx_P1_X1.Text = line.Substring(0, 10).Replace(" ", "");
                 line = myStreamReader.ReadLine();
                 tbx_P1_X2.Text = line.Substring(0, 10).Replace(" ", "");
                 line = myStreamReader.ReadLine();
@@ -1839,7 +2359,7 @@ namespace E520._47标定
                 line = myStreamReader.ReadLine();
                 tbx_PSPx_limit.Text = line.Substring(0, 10).Replace(" ", "");
                 tbx_status.Text = "标定参数导入成功";
-#endregion
+                #endregion
                 myStreamReader.Close();
             }
         }
@@ -2822,6 +3342,7 @@ namespace E520._47标定
         private void polynominal_T1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.T1_xuanze = polynominal_T1.SelectedIndex;
+            Properties.Settings.Default.Save();
             switch (polynominal_T1.SelectedIndex)       //缺少0
             {
                 case 1: T1_jie = 0x11; break;
@@ -2831,6 +3352,11 @@ namespace E520._47标定
                 default: break;
             }
 
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0); // 强制应用程序退出
         }
 
         private void polynominal_p1p2_SelectedIndexChanged(object sender, EventArgs e)
@@ -2847,11 +3373,15 @@ namespace E520._47标定
                 default: break;
             }
             Properties.Settings.Default.p1p2_xuanze = polynominal_p1p2.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
+
+
 
         private void polynominal_T2_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.T2_xuanze = polynominal_T2.SelectedIndex;
+            Properties.Settings.Default.Save();
             switch (polynominal_T2.SelectedIndex)       //缺少0
             {
                 case 1: T2_jie = 0x11; break;
@@ -2931,7 +3461,7 @@ namespace E520._47标定
             else if (SaveRdata.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.Savepath = SaveRdata.FileName;
-
+                Properties.Settings.Default.Save();
                 //FileStream myFileStream = new FileStream(SaveRdata.FileName, FileMode.OpenOrCreate, FileAccess.Write);
                 myStreamWriter = new StreamWriter(SaveRdata.FileName, true);
                 myStreamWriter.Flush();
@@ -3096,6 +3626,7 @@ namespace E520._47标定
             else if (openRdata.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.Savepath = openRdata.InitialDirectory;
+                Properties.Settings.Default.Save();
                 FileStream myFileStream = new FileStream(openRdata.FileName, FileMode.Open, FileAccess.Read);
                 myStreamReader = new StreamReader(myFileStream);
             }
@@ -3169,7 +3700,7 @@ namespace E520._47标定
 
         private void Timer_user_Tick(object sender, EventArgs e)
         {
-            if(character == "管理员")
+            if (character == "管理员")
             {
                 Administrator();
                 User_type.Text = users_name + "   " + character;
@@ -3193,16 +3724,13 @@ namespace E520._47标定
                 User_type.Text = users_name + "   " + character;
                 Timer_user.Enabled = false;
             }
-            else if(character =="未登录")
+            else if (character == "未登录")
             {
-               Close();
+                Close();
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            Date_Time.Text = DateTime.Now.ToString("g");
-        }
+
 
         //bool first_sample = true;
         private void tbx_cishu_TextChanged(object sender, EventArgs e)
@@ -3310,7 +3838,7 @@ namespace E520._47标定
             verify_shuzu[13] = tbx_T2_X2.Text;
             verify_shuzu[14] = tbx_T2_Y1.Text;
             verify_shuzu[15] = tbx_T2_Y2.Text;
-            verify_shuzu[16] = sensor_xuanze.ToString();           
+            verify_shuzu[16] = sensor_xuanze.ToString();
             verify verify1 = new verify();
             verify1.Show();
         }

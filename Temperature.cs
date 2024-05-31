@@ -19,7 +19,7 @@ namespace E520._47标定
         private static int ERR_EN4_3;
         private void SENT_T_Load(object sender, EventArgs e)
         {
-            if(Form1.Temperature_Flag == false)
+            if (Form1.Temperature_Flag == false)
             {
                 // 关联 ToolTip 控件和其他控件
                 toolTip1.SetToolTip(btn_Save, "修改内容不会保存。");
@@ -248,7 +248,34 @@ namespace E520._47标定
                 tbx_TSP_L.Enabled = false;
                 tbx_TSP_H.Enabled = false;
             }
-
+            //T1温度检查
+            a = (ERR_EN4_3 >> 4) & 1;
+            if (a == 1)
+            {
+                cbx_T1_enable.Checked = true;
+                //tbx_T1_min.Enabled = true;
+                //tbx_T1_max.Enabled = true;
+            }
+            else
+            {
+                cbx_T1_enable.Checked = false;
+                //tbx_T1_min.Enabled = false;
+                //tbx_T1_max.Enabled = false;
+            }
+            //T2温度检查
+            a = (ERR_EN4_3 >> 5) & 1;
+            if (a == 1)
+            {
+                cbx_T2_enable.Checked = true;
+                //tbx_T2_min.Enabled = true;
+                //tbx_T2_max.Enabled = true;
+            }
+            else
+            {
+                cbx_T2_enable.Checked = false;
+                //tbx_T2_min.Enabled = true;
+                //tbx_T2_max.Enabled = true;
+            }
             //ERR_EN2_1
             a = (ERR_EN4_3 >> 6) & 1;
             if (a == 1)
@@ -404,16 +431,16 @@ namespace E520._47标定
                 ERR_EN4_3 |= (1 << 4);
                 tbx_T1_min.Enabled = true;
                 tbx_T1_max.Enabled = true;
-                tbx_T1_min_value.Visible = true;
-                tbx_T1_max_value.Visible = true;
+                //tbx_T1_min_value.Visible = true;
+                //tbx_T1_max_value.Visible = true;
             }
             else
             {
                 ERR_EN4_3 &= ~(1 << 4);
                 tbx_T1_min.Enabled = false;
                 tbx_T1_max.Enabled = false;
-                tbx_T1_min_value.Visible = false;
-                tbx_T1_max_value.Visible = false;
+                //tbx_T1_min_value.Visible = false;
+                //tbx_T1_max_value.Visible = false;
             }
         }
 
@@ -424,16 +451,16 @@ namespace E520._47标定
                 ERR_EN4_3 |= (1 << 5);
                 tbx_T2_min.Enabled = true;
                 tbx_T2_max.Enabled = true;
-                tbx_T2_min_value.Visible = true;
-                tbx_T2_max_value.Visible = true;
+                //tbx_T2_min_value.Visible = true;
+                //tbx_T2_max_value.Visible = true;
             }
             else
             {
                 ERR_EN4_3 &= ~(1 << 5);
                 tbx_T2_min.Enabled = false;
                 tbx_T2_max.Enabled = false;
-                tbx_T2_min_value.Visible = false;
-                tbx_T2_max_value.Visible = false;
+                //tbx_T2_min_value.Visible = false;
+                //tbx_T2_max_value.Visible = false;
             }
         }
 

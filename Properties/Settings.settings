@@ -20,5 +20,14 @@
     <Setting Name="Cdatpath" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\\</Value>
     </Setting>
+    <Setting Name="COMpath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM5</Value>
+    </Setting>
+    <Setting Name="COMTpath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM10</Value>
+    </Setting>
+    <Setting Name="COMPpath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM11</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

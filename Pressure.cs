@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace E520._47标定
 {
@@ -34,7 +33,7 @@ namespace E520._47标定
 
         private void Pressure_Load(object sender, EventArgs e)
         {
-            if(Form1.Pressure_Flag == false)
+            if (Form1.Pressure_Flag == false)
             {
                 // 关联 ToolTip 控件和其他控件
                 toolTip1.SetToolTip(btn_Save, "修改内容不会保存。");

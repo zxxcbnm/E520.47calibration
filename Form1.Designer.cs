@@ -503,7 +503,6 @@
             this.CBX_MUX13 = new System.Windows.Forms.CheckBox();
             this.CBX_MUX14 = new System.Windows.Forms.CheckBox();
             this.CBX_MUX15 = new System.Windows.Forms.CheckBox();
-            this.tbx_status = new System.Windows.Forms.TextBox();
             this.enabled_channel = new System.Windows.Forms.ComboBox();
             this.listview_status = new System.Windows.Forms.ListView();
             this.ii = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -613,9 +612,15 @@
             this.Timer_user = new System.Windows.Forms.Timer(this.components);
             this.group2 = new System.Windows.Forms.GroupBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.COM_Port = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel10 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.COM_Port = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel12 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tbx_COM_T = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel13 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tbx_COM_P = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel14 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tbx_status = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.User_type = new System.Windows.Forms.ToolStripStatusLabel();
@@ -624,9 +629,14 @@
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.Date_Time = new System.Windows.Forms.ToolStripStatusLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tbx_COMP = new System.Windows.Forms.TextBox();
+            this.tbx_COMT = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.timer_portcheck = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.group1.SuspendLayout();
             this.group2.SuspendLayout();
@@ -742,13 +752,12 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(9, 654);
+            this.button2.Location = new System.Drawing.Point(9, 753);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 30);
             this.button2.TabIndex = 12;
             this.button2.Text = "刷新寄存器";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btn_Close
@@ -1005,20 +1014,12 @@
             this.CBX_MUX15.UseVisualStyleBackColor = true;
             this.CBX_MUX15.CheckedChanged += new System.EventHandler(this.CBX_MUX15_CheckedChanged);
             // 
-            // tbx_status
-            // 
-            this.tbx_status.Location = new System.Drawing.Point(18, 520);
-            this.tbx_status.Name = "tbx_status";
-            this.tbx_status.Size = new System.Drawing.Size(237, 25);
-            this.tbx_status.TabIndex = 34;
-            this.tbx_status.Text = "未找到串口，请检查";
-            // 
             // enabled_channel
             // 
             this.enabled_channel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.enabled_channel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.enabled_channel.FormattingEnabled = true;
-            this.enabled_channel.Location = new System.Drawing.Point(134, 627);
+            this.enabled_channel.Location = new System.Drawing.Point(134, 658);
             this.enabled_channel.Name = "enabled_channel";
             this.enabled_channel.Size = new System.Drawing.Size(96, 25);
             this.enabled_channel.TabIndex = 35;
@@ -1987,9 +1988,8 @@
             this.listView1.ItemHeight = 17;
             this.listView1.Location = new System.Drawing.Point(12, 573);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(97, 72);
+            this.listView1.Size = new System.Drawing.Size(97, 174);
             this.listView1.TabIndex = 43;
-            this.listView1.Visible = false;
             // 
             // btn_del_rdata
             // 
@@ -2150,9 +2150,15 @@
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.COM_Port,
             this.toolStripStatusLabel7,
+            this.toolStripStatusLabel10,
+            this.COM_Port,
+            this.toolStripStatusLabel12,
+            this.tbx_COM_T,
+            this.toolStripStatusLabel13,
+            this.tbx_COM_P,
+            this.toolStripStatusLabel14,
+            this.tbx_status,
             this.toolStripStatusLabel8,
             this.toolStripStatusLabel2,
             this.User_type,
@@ -2168,27 +2174,66 @@
             this.statusStrip1.TabIndex = 49;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(69, 20);
-            this.toolStripStatusLabel1.Text = "串口号：";
-            // 
-            // COM_Port
-            // 
-            this.COM_Port.Name = "COM_Port";
-            this.COM_Port.Size = new System.Drawing.Size(54, 20);
-            this.COM_Port.Text = "未找到";
-            // 
             // toolStripStatusLabel7
             // 
             this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
             this.toolStripStatusLabel7.Size = new System.Drawing.Size(0, 20);
             // 
+            // toolStripStatusLabel10
+            // 
+            this.toolStripStatusLabel10.Name = "toolStripStatusLabel10";
+            this.toolStripStatusLabel10.Size = new System.Drawing.Size(69, 20);
+            this.toolStripStatusLabel10.Text = "通信板：";
+            // 
+            // COM_Port
+            // 
+            this.COM_Port.Enabled = false;
+            this.COM_Port.Name = "COM_Port";
+            this.COM_Port.Size = new System.Drawing.Size(54, 20);
+            this.COM_Port.Text = "未找到";
+            // 
+            // toolStripStatusLabel12
+            // 
+            this.toolStripStatusLabel12.Name = "toolStripStatusLabel12";
+            this.toolStripStatusLabel12.Size = new System.Drawing.Size(99, 20);
+            this.toolStripStatusLabel12.Text = "温度传感器：";
+            // 
+            // tbx_COM_T
+            // 
+            this.tbx_COM_T.Enabled = false;
+            this.tbx_COM_T.Name = "tbx_COM_T";
+            this.tbx_COM_T.Size = new System.Drawing.Size(54, 20);
+            this.tbx_COM_T.Text = "未找到";
+            // 
+            // toolStripStatusLabel13
+            // 
+            this.toolStripStatusLabel13.Name = "toolStripStatusLabel13";
+            this.toolStripStatusLabel13.Size = new System.Drawing.Size(99, 20);
+            this.toolStripStatusLabel13.Text = "压力控制器：";
+            // 
+            // tbx_COM_P
+            // 
+            this.tbx_COM_P.Enabled = false;
+            this.tbx_COM_P.Name = "tbx_COM_P";
+            this.tbx_COM_P.Size = new System.Drawing.Size(54, 20);
+            this.tbx_COM_P.Text = "未找到";
+            // 
+            // toolStripStatusLabel14
+            // 
+            this.toolStripStatusLabel14.Name = "toolStripStatusLabel14";
+            this.toolStripStatusLabel14.Size = new System.Drawing.Size(54, 20);
+            this.toolStripStatusLabel14.Text = "状态：";
+            // 
+            // tbx_status
+            // 
+            this.tbx_status.Name = "tbx_status";
+            this.tbx_status.Size = new System.Drawing.Size(100, 20);
+            this.tbx_status.Text = "查找串口中....";
+            // 
             // toolStripStatusLabel8
             // 
             this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
-            this.toolStripStatusLabel8.Size = new System.Drawing.Size(255, 20);
+            this.toolStripStatusLabel8.Size = new System.Drawing.Size(102, 20);
             this.toolStripStatusLabel8.Spring = true;
             this.toolStripStatusLabel8.Text = "  ";
             // 
@@ -2207,7 +2252,7 @@
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(255, 20);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(102, 20);
             this.toolStripStatusLabel3.Spring = true;
             this.toolStripStatusLabel3.Text = " ";
             // 
@@ -2220,7 +2265,7 @@
             // toolStripStatusLabel6
             // 
             this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(255, 20);
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(102, 20);
             this.toolStripStatusLabel6.Spring = true;
             // 
             // toolStripStatusLabel5
@@ -2235,17 +2280,63 @@
             this.Date_Time.Size = new System.Drawing.Size(119, 20);
             this.Date_Time.Text = "2024.3.6  11:37";
             // 
+            // toolStripStatusLabel9
+            // 
+            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
+            this.toolStripStatusLabel9.Size = new System.Drawing.Size(17, 20);
+            this.toolStripStatusLabel9.Text = "  ";
+            // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 520;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // toolStripStatusLabel9
+            // tbx_COMP
             // 
-            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
-            this.toolStripStatusLabel9.Size = new System.Drawing.Size(17, 20);
-            this.toolStripStatusLabel9.Text = "  ";
+            this.tbx_COMP.Location = new System.Drawing.Point(134, 608);
+            this.tbx_COMP.Name = "tbx_COMP";
+            this.tbx_COMP.ReadOnly = true;
+            this.tbx_COMP.Size = new System.Drawing.Size(51, 25);
+            this.tbx_COMP.TabIndex = 55;
+            this.tbx_COMP.TabStop = false;
+            this.tbx_COMP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // tbx_COMT
+            // 
+            this.tbx_COMT.Location = new System.Drawing.Point(134, 573);
+            this.tbx_COMT.Name = "tbx_COMT";
+            this.tbx_COMT.ReadOnly = true;
+            this.tbx_COMT.Size = new System.Drawing.Size(51, 25);
+            this.tbx_COMT.TabIndex = 56;
+            this.tbx_COMT.TabStop = false;
+            this.tbx_COMT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label43.Location = new System.Drawing.Point(191, 610);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(35, 18);
+            this.label43.TabIndex = 53;
+            this.label43.Text = "Kpa";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label41.Location = new System.Drawing.Point(191, 575);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(26, 18);
+            this.label41.TabIndex = 54;
+            this.label41.Text = "℃";
+            // 
+            // timer_portcheck
+            // 
+            this.timer_portcheck.Enabled = true;
+            this.timer_portcheck.Interval = 3000;
+            this.timer_portcheck.Tick += new System.EventHandler(this.timer_portcheck_Tick);
             // 
             // Form1
             // 
@@ -2255,6 +2346,10 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1432, 859);
+            this.Controls.Add(this.tbx_COMP);
+            this.Controls.Add(this.tbx_COMT);
+            this.Controls.Add(this.label43);
+            this.Controls.Add(this.label41);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.group2);
             this.Controls.Add(this.btn_cdat_save);
@@ -2279,7 +2374,6 @@
             this.Controls.Add(this.listview_status);
             this.Controls.Add(this.enabled_channel);
             this.Controls.Add(this.CBX_MUX0);
-            this.Controls.Add(this.tbx_status);
             this.Controls.Add(this.CBX_MUX1);
             this.Controls.Add(this.CBX_MUX2);
             this.Controls.Add(this.btn_READ_NVM);
@@ -2317,6 +2411,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "E520.47 Calibrate software";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.group1.ResumeLayout(false);
@@ -2364,7 +2459,6 @@
         private System.Windows.Forms.CheckBox CBX_MUX13;
         private System.Windows.Forms.CheckBox CBX_MUX14;
         private System.Windows.Forms.CheckBox CBX_MUX15;
-        private System.Windows.Forms.TextBox tbx_status;
         private System.Windows.Forms.ComboBox enabled_channel;
         private System.Windows.Forms.ListView listview_status;
         private System.Windows.Forms.ColumnHeader ID;
@@ -2474,8 +2568,6 @@
         private System.Windows.Forms.Timer Timer_user;
         private System.Windows.Forms.GroupBox group2;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel COM_Port;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel User_type;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
@@ -2488,6 +2580,19 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel9;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel10;
+        private System.Windows.Forms.ToolStripStatusLabel COM_Port;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel12;
+        private System.Windows.Forms.ToolStripStatusLabel tbx_COM_T;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel13;
+        private System.Windows.Forms.ToolStripStatusLabel tbx_COM_P;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel14;
+        private System.Windows.Forms.ToolStripStatusLabel tbx_status;
+        private System.Windows.Forms.TextBox tbx_COMP;
+        private System.Windows.Forms.TextBox tbx_COMT;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Timer timer_portcheck;
     }
 }
 

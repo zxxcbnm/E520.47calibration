@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace E520._47标定
 {
@@ -22,7 +20,7 @@ namespace E520._47标定
                 toolTip1.SetToolTip(groupBox1, "当前账户修改无效，请使用管理员登录。");
                 toolTip1.SetToolTip(groupBox2, "当前账户修改无效，请使用管理员登录。");
                 toolTip1.SetToolTip(groupBox3, "当前账户修改无效，请使用管理员登录。");
-                toolTip1.SetToolTip(groupBox4, "当前账户修改无效，请使用管理员登录。");                
+                toolTip1.SetToolTip(groupBox4, "当前账户修改无效，请使用管理员登录。");
                 btn_Save.Text = "退出";
             }
             tbx_ERR_EN2_1.Text = "0x" + Form1.NVM_code[0x3F];

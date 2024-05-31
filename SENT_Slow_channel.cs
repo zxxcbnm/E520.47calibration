@@ -615,7 +615,7 @@ namespace E520._47标定
 
         private void SENT_Slow_channel_Load(object sender, EventArgs e)
         {
-            if(Form1.Slow_channel_Flag)
+            if (Form1.Slow_channel_Flag)
             {
                 btn_add.Enabled = true;
                 btn_insert_01.Enabled = true;
