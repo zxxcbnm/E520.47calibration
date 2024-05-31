@@ -94,5 +94,41 @@ namespace E520._47标定.Properties {
                 this["Cdatpath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM5")]
+        public string COMpath {
+            get {
+                return ((string)(this["COMpath"]));
+            }
+            set {
+                this["COMpath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM10")]
+        public string COMTpath {
+            get {
+                return ((string)(this["COMTpath"]));
+            }
+            set {
+                this["COMTpath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM11")]
+        public string COMPpath {
+            get {
+                return ((string)(this["COMPpath"]));
+            }
+            set {
+                this["COMPpath"] = value;
+            }
+        }
     }
 }

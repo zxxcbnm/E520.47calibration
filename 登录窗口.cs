@@ -1,15 +1,7 @@
 ﻿using OlymmpicManagementSystem.Util;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace E520._47标定
 {
@@ -54,7 +46,7 @@ namespace E520._47标定
         private void btn_login_Click(object sender, EventArgs e)
         {
             Confirm_login();
-        }     
+        }
         private void Users_name_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -65,7 +57,7 @@ namespace E520._47标定
         }
         private void Users_password_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar ==(char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 e.Handled = true;
                 Confirm_login();
