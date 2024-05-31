@@ -484,7 +484,6 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.PortName = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.TimeOut = new System.Windows.Forms.Timer(this.components);
             this.btn_Write_NVM = new System.Windows.Forms.Button();
             this.btn_READ_NVM = new System.Windows.Forms.Button();
@@ -616,6 +615,18 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.COM_Port = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.User_type = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Date_Time = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.group1.SuspendLayout();
             this.group2.SuspendLayout();
@@ -767,20 +778,11 @@
             this.PortName.Enabled = false;
             this.PortName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PortName.FormattingEnabled = true;
-            this.PortName.Location = new System.Drawing.Point(69, 778);
+            this.PortName.Location = new System.Drawing.Point(37, 786);
             this.PortName.Name = "PortName";
             this.PortName.Size = new System.Drawing.Size(86, 25);
             this.PortName.TabIndex = 27;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 783);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "串口号";
+            this.PortName.Visible = false;
             // 
             // TimeOut
             // 
@@ -1888,6 +1890,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
+            this.label32.Enabled = false;
             this.label32.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.Location = new System.Drawing.Point(1020, 716);
             this.label32.Name = "label32";
@@ -1898,6 +1901,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
+            this.label33.Enabled = false;
             this.label33.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.Location = new System.Drawing.Point(1020, 766);
             this.label33.Name = "label33";
@@ -1926,6 +1930,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
+            this.label34.Enabled = false;
             this.label34.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.Location = new System.Drawing.Point(1150, 766);
             this.label34.Name = "label34";
@@ -1959,13 +1964,14 @@
             this.tbx_PSPx_limit.Name = "tbx_PSPx_limit";
             this.tbx_PSPx_limit.Size = new System.Drawing.Size(48, 25);
             this.tbx_PSPx_limit.TabIndex = 38;
-            this.tbx_PSPx_limit.Text = "3.0";
+            this.tbx_PSPx_limit.Text = "3";
             this.tbx_PSPx_limit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbx_PSPx_limit.TextChanged += new System.EventHandler(this.tbx_PSPx_limit_TextChanged);
             // 
             // label35
             // 
             this.label35.AutoSize = true;
+            this.label35.Enabled = false;
             this.label35.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.Location = new System.Drawing.Point(1019, 648);
             this.label35.Name = "label35";
@@ -2077,7 +2083,7 @@
             this.btn_cdat_open.Enabled = false;
             this.btn_cdat_open.Location = new System.Drawing.Point(134, 689);
             this.btn_cdat_open.Name = "btn_cdat_open";
-            this.btn_cdat_open.Size = new System.Drawing.Size(80, 30);
+            this.btn_cdat_open.Size = new System.Drawing.Size(90, 30);
             this.btn_cdat_open.TabIndex = 47;
             this.btn_cdat_open.Text = "导入参数";
             this.btn_cdat_open.UseVisualStyleBackColor = true;
@@ -2088,7 +2094,7 @@
             this.btn_cdat_save.Enabled = false;
             this.btn_cdat_save.Location = new System.Drawing.Point(134, 725);
             this.btn_cdat_save.Name = "btn_cdat_save";
-            this.btn_cdat_save.Size = new System.Drawing.Size(80, 30);
+            this.btn_cdat_save.Size = new System.Drawing.Size(90, 30);
             this.btn_cdat_save.TabIndex = 47;
             this.btn_cdat_save.Text = "另存参数";
             this.btn_cdat_save.UseVisualStyleBackColor = true;
@@ -2145,7 +2151,17 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.COM_Port});
+            this.COM_Port,
+            this.toolStripStatusLabel7,
+            this.toolStripStatusLabel8,
+            this.toolStripStatusLabel2,
+            this.User_type,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4,
+            this.toolStripStatusLabel6,
+            this.toolStripStatusLabel5,
+            this.Date_Time,
+            this.toolStripStatusLabel9});
             this.statusStrip1.Location = new System.Drawing.Point(0, 833);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1432, 26);
@@ -2161,8 +2177,75 @@
             // COM_Port
             // 
             this.COM_Port.Name = "COM_Port";
-            this.COM_Port.Size = new System.Drawing.Size(167, 20);
-            this.COM_Port.Text = "toolStripStatusLabel2";
+            this.COM_Port.Size = new System.Drawing.Size(54, 20);
+            this.COM_Port.Text = "未找到";
+            // 
+            // toolStripStatusLabel7
+            // 
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(0, 20);
+            // 
+            // toolStripStatusLabel8
+            // 
+            this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
+            this.toolStripStatusLabel8.Size = new System.Drawing.Size(255, 20);
+            this.toolStripStatusLabel8.Spring = true;
+            this.toolStripStatusLabel8.Text = "  ";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(54, 20);
+            this.toolStripStatusLabel2.Text = "用户：";
+            // 
+            // User_type
+            // 
+            this.User_type.Name = "User_type";
+            this.User_type.Size = new System.Drawing.Size(54, 20);
+            this.User_type.Text = "未登录";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(255, 20);
+            this.toolStripStatusLabel3.Spring = true;
+            this.toolStripStatusLabel3.Text = " ";
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(199, 20);
+            this.toolStripStatusLabel4.Text = "版本: 1.1.0.240316_release";
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(255, 20);
+            this.toolStripStatusLabel6.Spring = true;
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(84, 20);
+            this.toolStripStatusLabel5.Text = "当前时间：";
+            // 
+            // Date_Time
+            // 
+            this.Date_Time.Name = "Date_Time";
+            this.Date_Time.Size = new System.Drawing.Size(119, 20);
+            this.Date_Time.Text = "2024.3.6  11:37";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 520;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // toolStripStatusLabel9
+            // 
+            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
+            this.toolStripStatusLabel9.Size = new System.Drawing.Size(17, 20);
+            this.toolStripStatusLabel9.Text = "  ";
             // 
             // Form1
             // 
@@ -2204,7 +2287,6 @@
             this.Controls.Add(this.btn_Write_NVM);
             this.Controls.Add(this.CBX_MUX4);
             this.Controls.Add(this.CBX_MUX5);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.CBX_MUX6);
             this.Controls.Add(this.PortName);
             this.Controls.Add(this.CBX_MUX7);
@@ -2234,7 +2316,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "E520.47 Calibrate software(Elmos version1.0,2023.8.28)";
+            this.Text = "E520.47 Calibrate software";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.group1.ResumeLayout(false);
@@ -2263,7 +2345,6 @@
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ComboBox PortName;
-        private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Timer TimeOut;
         private System.Windows.Forms.Button btn_Write_NVM;
         private System.Windows.Forms.Button btn_READ_NVM;
@@ -2395,6 +2476,18 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel COM_Port;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel User_type;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel Date_Time;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel9;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

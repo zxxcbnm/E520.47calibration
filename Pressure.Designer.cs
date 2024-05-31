@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cbx_PV_EN = new System.Windows.Forms.CheckBox();
             this.tbx_p1_ADC_max = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -118,6 +119,7 @@
             this.cbx_p2_EN = new System.Windows.Forms.CheckBox();
             this.lbl_warning1 = new System.Windows.Forms.Label();
             this.lbl_warning2 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1315,5 +1317,6 @@
         private System.Windows.Forms.CheckBox cbx_p2_EN;
         private System.Windows.Forms.Label lbl_warning1;
         private System.Windows.Forms.Label lbl_warning2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

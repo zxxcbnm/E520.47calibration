@@ -511,6 +511,11 @@ namespace E520._47标定
         }
         private void btn_exit_Click(object sender, EventArgs e)
         {
+            if (btn_exit.Text == "退出")
+            {
+                Close();
+                return;
+            }
             //保存OEM值
             //先检查OEM有没有特殊字符
             try
@@ -605,21 +610,24 @@ namespace E520._47标定
             lbx_NVM_data.Items.Clear();
             //Form1.CRC1();
             Form1.CRC2();
-            this.Close();
+            Close();
         }
 
         private void SENT_Slow_channel_Load(object sender, EventArgs e)
         {
-            ////读取OEM值 弃用
-            //Tbx_OEM1.Text = Form1.NVM_code[0].ToString();
-            //Tbx_OEM2.Text = Form1.NVM_code[1].ToString();
-            //Tbx_OEM3.Text = Form1.NVM_code[2].ToString();
-            //Tbx_OEM4.Text = Form1.NVM_code[3].ToString();
-            //Tbx_OEM5.Text = Form1.NVM_code[4].ToString();
-            //Tbx_OEM6.Text = Form1.NVM_code[5].ToString();
-            //Tbx_OEM7.Text = Form1.NVM_code[6].ToString();
-            //Tbx_OEM8.Text = Form1.NVM_code[7].ToString();
-
+            if(Form1.Slow_channel_Flag)
+            {
+                btn_add.Enabled = true;
+                btn_insert_01.Enabled = true;
+                btn_change_data.Enabled = true;
+                btn_delete.Enabled = true;
+                btn_exit.Enabled = true;
+            }
+            else
+            {
+                btn_exit.Text = "退出";
+                toolTip1.SetToolTip(btn_exit, "修改内容不会保存。");
+            }
             //读取OEM值
             Tbx_OEM1.Text = Form1.NVM_code[0].ToString().Substring(1, 3);
             Tbx_OEM2.Text = Form1.NVM_code[1].ToString().Substring(1, 3);
